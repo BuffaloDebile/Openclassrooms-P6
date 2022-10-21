@@ -1,0 +1,15 @@
+html,
+*,
+*::before,
+*::after {
+  --color-primary-red: #901c1c;
+  --color-primary-pale-red: #d3573c;
+  --color-primary-grey: #fafafa;
+  --color-text-dark-grey: #141414;
+
+  --screen-sm: 640px;
+  --screen-md: 768px;
+  --screen-lg: 1024px;
+  --screen-xl: 1280px;
+  --screen-xl-2: 1536px;
+}
