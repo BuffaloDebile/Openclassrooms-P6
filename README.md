@@ -36,5 +36,7 @@ It includes fields for names, email address and message. display the contents of
 <li><a href="https://www.figma.com/file/Q3yNeD7WTK9QHDldg9vaRl/UI-Design-FishEye-FR?node-id=0%3A1" target="_blank">Figma template</a></li>
 <li>A <a href="https://github.com/OpenClassrooms-Student-Center/Front-End-Fisheye/blob/main/data/photographers.json" target="_blank">JSON file</a></li>
 
-<p>Project started on : 10/10/2022</p>
-<p>Project Completed on : 19/10/2022 </p>
+<br><br>
+
+<p>Project started on : 21/10/2022</p>
+<p>Project Completed on : xx/xx/2022 </p>

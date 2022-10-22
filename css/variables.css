@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap');
+
 html,
 *,
 *::before,
@@ -5,11 +7,14 @@ html,
   --color-primary-red: #901c1c;
   --color-primary-pale-red: #d3573c;
   --color-primary-grey: #fafafa;
-  --color-text-dark-grey: #141414;
+  --color-text-dark-grey: #151515;
+  --color-text-clear-grey: #757575;
 
   --screen-sm: 640px;
   --screen-md: 768px;
   --screen-lg: 1024px;
   --screen-xl: 1280px;
   --screen-xl-2: 1536px;
+
+  font-family: 'DM Sans', sans-serif;
 }

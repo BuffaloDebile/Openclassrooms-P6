@@ -3,36 +3,82 @@ body {
   margin: 0;
 }
 
-header {
+header.header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   height: 90px;
   max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
+  margin: 40px auto;
+  padding: 0 30px;
 }
 
-h1 {
+h1.main-title {
   color: #901c1c;
-  font-size: 2rem;
+  font-size: calc(1rem + 1vw);
   font-weight: 400;
 }
 
 .logo {
-  height: 50px;
+  height: clamp(20px, 30px + 1vw, 60px);
 }
 
 .photographer-container {
   max-width: 1200px;
-  padding: 0 20px;
+  padding: 0 30px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
+  margin: 0 auto;
   margin-top: 100px;
 }
 
+section.photographer-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+section.photographer-card img {
+  border-radius: 50%;
+  height: 160px;
+  width: 160px;
+  object-fit: cover;
+}
+
+section.photographer-card a {
+  text-decoration: none;
+}
+
+section.photographer-card h2.card-title {
+  margin-top: 1rem;
+  font-size: 3rem;
+  text-align: center;
+  color: var(--color-primary-pale-red);
+}
+
+section.photographer-card h3.cards-location {
+  color: var(--color-primary-red);
+  margin-top: 0.5rem;
+  font-size: 1.8rem;
+  font-weight: 800;
+  text-align: center;
+}
+
+section.photographer-card p.cards-tagline {
+  font-size: 1.3rem;
+  text-align: center;
+}
+
+section.photographer-card p.cards-price {
+  font-size: 1.3rem;
+  color: var(--color-text-clear-grey);
+  text-align: center;
+}
+
+/* Code by default */
 .photographer_section article {
   justify-self: center;
   display: flex;
