@@ -46,6 +46,7 @@ section.photographer-card img {
   height: 160px;
   width: 160px;
   object-fit: cover;
+  margin: auto;
 }
 
 section.photographer-card a {

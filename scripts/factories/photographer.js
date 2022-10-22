@@ -1,24 +1,7 @@
-function photographerFactory(data) {
-  const { name, portrait } = data;
-
-  const picture = `sources/img/${portrait}`;
-
-  function getUserCardDOM() {
-    const article = document.createElement('article');
-    const img = document.createElement('img');
-    img.setAttribute('src', picture);
-    const h2 = document.createElement('h2');
-    h2.textContent = name;
-    article.appendChild(img);
-    article.appendChild(h2);
-    return article;
-  }
-  return { name, picture, getUserCardDOM };
-}
-
 // My JS
 
 const linkToData = '././data/photographers.json';
+const photographerContainer = document.querySelector('.photographer-container');
 
 let dataArray;
 let photographerList = [];
@@ -33,7 +16,7 @@ window.addEventListener('load', () => {
       dataArray = results;
 
       createPhotographerArray(dataArray);
-
+      createNewPhotographerCard(photographerList);
     } catch (error) {
       console.log(`Une erreur est survenu ! `);
     }
@@ -57,6 +40,25 @@ function createPhotographerArray(results) {
   });
 }
 
+function createNewPhotographerCard(photographerList) {
+  photographerList.forEach((photographer) => {
+    const card = document.createElement('section');
+    card.className = 'photographer-card';
+    card.innerHTML = `
+    <header class="header-card">
+    <a class="card-photographer-link" href="photographer.html?id=${photographer.id} " role="link">
+      <img src="sources/img/1_small/PhotographersID/${photographer.portrait}" alt="image portrait du photographe ${photographer.name}">
+      <h2 class="card-title">${photographer.name}</h2>
+    </a>
+  </header>
+  <div class="cards-body">
+    <h3 class="cards-location">${photographer.city}, ${photographer.country}</h3>
+    <p class="cards-tagline">${photographer.tagline}</p>
+    <p class="cards-price">${photographer.price}€/Jour</p>
+  </div>`;
+    photographerContainer.appendChild(card);
+  });
+}
 
 class Photographer {
   constructor(city, country, id, name, portrait, price, tagline) {
