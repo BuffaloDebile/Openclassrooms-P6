@@ -22,6 +22,7 @@ h1.main-title {
 
 .logo {
   height: clamp(20px, 30px + 1vw, 60px);
+  width: auto;
 }
 
 .photographer-container {
@@ -29,8 +30,7 @@ h1.main-title {
   padding: 0 30px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  margin: 0 auto;
-  margin-top: 100px;
+  margin: 70px auto;
 }
 
 section.photographer-card {
@@ -49,8 +49,15 @@ section.photographer-card img {
   margin: auto;
 }
 
-section.photographer-card a {
+section.photographer-card a.card-photographer-link {
   text-decoration: none;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  display: inline-block;
+}
+
+section.photographer-card a.card-photographer-link:hover {
+  transform: scale(1.1);
 }
 
 section.photographer-card h2.card-title {
@@ -97,3 +104,6 @@ section.photographer-card p.cards-price {
   height: 200px;
   width: 200px;
 }
+
+/* Animations */
+

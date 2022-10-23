@@ -27,7 +27,7 @@ window.addEventListener('load', () => {
 function createPhotographerArray(results) {
   results.photographers.forEach((photographer) => {
     photographerList.push(
-      new Photographer(
+      newPhotographer(
         photographer.city,
         photographer.country,
         photographer.id,
@@ -60,16 +60,16 @@ function createNewPhotographerCard(photographerList) {
   });
 }
 
-class Photographer {
-  constructor(city, country, id, name, portrait, price, tagline) {
-    this.city = city;
-    this.country = country;
-    this.id = id;
-    this.name = name;
-    this.portrait = portrait;
-    this.price = price;
-    this.tagline = tagline;
-  }
+function newPhotographer(city, country, id, name, portrait, price, tagline) {
+  return {
+    city,
+    country,
+    id,
+    name,
+    portrait,
+    price,
+    tagline,
+  };
 }
 
 console.log(photographerList);
