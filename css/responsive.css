@@ -1,0 +1,22 @@
+@media only screen and (max-width: 1024px) {
+  div.banner-photographe#banner {
+    padding: 10px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    flex-direction: column;
+    position: relative;
+  }
+
+  .banner-text-wrapper {
+    width: 70%;
+  }
+
+  .banner-img img {
+    position: absolute;
+    top: 40px;
+    right: 10px;
+    height: 12rem;
+    width: 12rem;
+  }
+}

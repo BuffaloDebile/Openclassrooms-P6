@@ -16,3 +16,70 @@
   border-radius: 5px;
   cursor: pointer;
 }
+
+div.banner-photographe {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 10px 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-items: center;
+  background-color: #fafafa;
+  border-radius: 0.6rem;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.banner-text-wrapper {
+  margin: 2rem 0;
+}
+
+h1.title {
+  color: var(--color-primary-pale-red);
+  font-size: 4rem;
+  margin-bottom: 2.2rem;
+}
+
+.banner-text-wrapper p {
+  line-height: 3.5rem;
+}
+
+p.location {
+  font-size: 2.1rem;
+  color: var(--color-primary-red);
+}
+
+p.tagline {
+  font-size: 2.1rem;
+  color: var(--color-text-clear-grey);
+}
+
+div.banner-photographe button.banner-photographer-btn {
+  font-size: 1.5rem;
+  padding: 1.5rem 4rem;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 0.6rem;
+  background-color: var(--color-primary-red);
+  color: white;
+  border: none;
+  -webkit-transition: all 0.1s ease-in;
+  transition: all 0.1s ease-in;
+  border-radius: 0.6rem;
+  cursor: pointer;
+}
+
+div.banner-photographe button.banner-photographer-btn:hover {
+  background-color: var(--color-primary-pale-red);
+  color: var(--color-text-dark-grey);
+}
+
+.banner-img img {
+  height: 15rem;
+  width: 15rem;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-right: 3rem;
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px,
+    rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
+}

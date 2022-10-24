@@ -1,19 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 
 <head>
   <link href="css/style.css" rel="stylesheet" type="text/css" />
   <meta charset="utf-8">
-  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+
+
+  <link rel="icon" type="image/png" href="sources/img/favicon.ico">
   <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
-  <title>Fisheye - photographe </title>
+  <title>Fisheye - Photographe</title>
+  <meta name="description" content="découvrez tout nos photographes de chez Fisheye">
+  <meta name="keywords" content="FishEye, Openclassrooms, photographes, project 6">
+  <meta name="author" content="FishEye">
+
 </head>
 
 <body>
   <header class="header">
-    <img src="sources/img/logo/logo.svg" class="logo" />
+    <a href="index.html"><img src="sources/img/logo/logo.svg" class="logo" /></a>
   </header>
-  <main id="main">
+  <main id="main-photographe">
+
+    <div class="banner-photographe" id="banner" role="banner">
+      <div class="banner-text-wrapper">
+        <h1 class="title" lang="en">Ellie-Rose Wilkens</h1>
+        <p class="location">Paris ,France</p>
+        <p class="tagline">Capturer des compositions complexes</p>
+      </div><button class="banner-photographer-btn">Contacter-moi</button>
+      <div class="banner-img"><img src="./sources/img/1_small/PhotographersID/EllieRoseWilkens.jpg"
+          alt="Ellie-Rose Wilkens"></div>
+    </div>
+
     <div class="photograph-header">
       <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
     </div>
@@ -22,7 +41,7 @@
     <div class="modal">
       <header>
         <h2>Contactez-moi</h2>
-        <img src="assets/icons/close.svg" onclick="closeModal()" />
+        <img src="sources/icons/close.svg" onclick="closeModal()" />
       </header>
       <form>
         <div>
