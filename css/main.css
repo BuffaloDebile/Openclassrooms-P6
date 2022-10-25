@@ -38,7 +38,7 @@ section.photographer-card {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  padding: 30px;
 }
 
 section.photographer-card img {
@@ -106,4 +106,3 @@ section.photographer-card p.cards-price {
 }
 
 /* Animations */
-
