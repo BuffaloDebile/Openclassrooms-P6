@@ -63,7 +63,6 @@ section.banner-photographe button.banner-photographer-btn {
   background-color: var(--color-primary-red);
   color: white;
   border: none;
-  -webkit-transition: all 0.1s ease-in;
   transition: all 0.1s ease-in;
   border-radius: 0.6rem;
   cursor: pointer;
@@ -94,7 +93,6 @@ section.filter {
   flex-direction: row;
   align-items: center;
   justify-content: start;
-  margin: 3rem 3%;
 }
 
 h3#trier {
@@ -230,4 +228,59 @@ span.chosen {
   left: 0.5rem;
   -webkit-transform: rotate(45deg);
   transform: rotate(45deg);
+}
+
+section.grid-gallerie {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 10px;
+}
+
+img.gallerie-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 0.6rem;
+}
+
+article.card {
+  max-width: 30rem;
+  width: 30rem;
+  margin: 3rem;
+  height: 19rem;
+  display: inline-block;
+}
+
+div.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 0.3rem;
+}
+
+.card-footer p {
+  font-size: 17px;
+  color: var(--color-primary-red);
+}
+
+p.like-counter {
+  margin-right: 0.5rem;
+}
+
+.heart-like {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+button.heart-link {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.8rem;
+  color: var(--color-primary-red);
+}
+
+button.heart-link i {
+  display: inherit;
+  margin-top: -7px;
 }
