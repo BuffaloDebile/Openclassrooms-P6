@@ -24,7 +24,6 @@ section.banner-photographe {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  align-items: center;
   background-color: #fafafa;
   border-radius: 0.6rem;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
@@ -234,20 +233,51 @@ section.grid-gallerie {
   max-width: 1200px;
   margin: 40px auto;
   padding: 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  column-gap: 2.5%;
 }
 
 img.gallerie-img {
   width: 100%;
   height: 100%;
   border-radius: 0.6rem;
+  transform: scale(1);
+  transition: all 0.3s ease-in-out;
+}
+div.img-wrapper > * {
+  width: 100%;
+  height: 100%;
+  border-radius: 0.6rem;
+  transform: scale(1);
+  transition: all 0.3s ease-in-out;
 }
 
 article.card {
-  max-width: 30rem;
-  width: 30rem;
-  margin: 3rem;
-  height: 19rem;
+  width: 100%;
+  margin: 1rem auto;
+  height: auto;
   display: inline-block;
+}
+
+div.img-wrapper {
+  overflow: hidden;
+  border-radius: 0.6rem;
+}
+
+a.card-wrapper:hover img {
+  transform: scale(1.15);
+  transition: all 0.3s ease-in-out;
+}
+
+a.card-wrapper:hover video {
+  transform: scale(1.15);
+  transition: all 0.3s ease-in-out;
+}
+
+a.card-wrapper:hover p {
+  color: var(--color-text-dark-grey);
+  transition: all 0.2s ease-in-out;
 }
 
 div.card-footer {
@@ -260,10 +290,12 @@ div.card-footer {
 .card-footer p {
   font-size: 17px;
   color: var(--color-primary-red);
+  transition: all 0.2s ease-in-out;
 }
 
 p.like-counter {
   margin-right: 0.5rem;
+  transition: all 0.2s ease-in-out;
 }
 
 .heart-like {
@@ -283,4 +315,32 @@ button.heart-link {
 button.heart-link i {
   display: inherit;
   margin-top: -7px;
+  /* animation: pulse 1s ease-in-out; */
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  10% {
+    transform: scale(1.1);
+  }
+  20% {
+    transform: scale(0.9);
+  }
+  30% {
+    transform: scale(1.2);
+  }
+  40% {
+    transform: scale(0.9);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  60% {
+    transform: scale(0.95);
+  }
+  70% {
+    transform: scale(1);
+  }
 }
