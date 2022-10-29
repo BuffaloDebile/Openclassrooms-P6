@@ -235,7 +235,7 @@ section.grid-gallerie {
   padding: 10px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-  column-gap: 2.5%;
+  column-gap: 2.8%;
 }
 
 img.gallerie-img {
@@ -255,7 +255,7 @@ div.img-wrapper > * {
 
 article.card {
   width: 100%;
-  margin: 1rem auto;
+  margin: 1.5rem auto;
   height: auto;
   display: inline-block;
 }
@@ -316,6 +316,38 @@ button.heart-link i {
   display: inherit;
   margin-top: -7px;
   /* animation: pulse 1s ease-in-out; */
+}
+
+div.total-like-counter {
+  position: fixed;
+  bottom: 0;
+  right: 5%;
+  background-color: #db8876;
+  padding: 1rem 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.8rem 0.8rem 0 0;
+}
+
+.total-like {
+  font-weight: 200;
+  font-size: 2.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+}
+
+.total-like i {
+  font-size: 2.9rem;
+  margin: -3px 2rem 0 0.5rem;
+}
+
+.price {
+  font-weight: 200;
+  font-size: 1.8rem;
+  font-weight: 500;
 }
 
 @keyframes pulse {

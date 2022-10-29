@@ -8,6 +8,10 @@
     position: relative;
   }
 
+  section.grid-gallerie {
+    padding: 25px;
+  }
+
   .banner-text-wrapper {
     width: 70%;
   }

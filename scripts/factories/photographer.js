@@ -1,10 +1,11 @@
-// My JS
+export { photographerList, mediaList };
 
 const linkToData = '././data/photographers.json';
 const photographerContainer = document.querySelector('.photographer-container');
 
 let dataArray;
 let photographerList = [];
+let mediaList = [];
 
 window.addEventListener('load', () => {
   async function getPhotographers() {
@@ -15,7 +16,14 @@ window.addEventListener('load', () => {
 
       dataArray = results;
 
-      createPhotographerArray(dataArray);
+      dataArray.photographers.forEach((photographer) => {
+        photographerList.push(photographer);
+      });
+
+      dataArray.media.forEach((media) => {
+        mediaList.push(media);
+      });
+
       createNewPhotographerCard(photographerList);
     } catch (error) {
       console.log(`Une erreur est survenu ! `);
@@ -24,21 +32,27 @@ window.addEventListener('load', () => {
   getPhotographers();
 });
 
-function createPhotographerArray(results) {
-  results.photographers.forEach((photographer) => {
-    photographerList.push(
-      newPhotographer(
-        photographer.city,
-        photographer.country,
-        photographer.id,
-        photographer.name,
-        photographer.portrait,
-        photographer.price,
-        photographer.tagline,
-      ),
-    );
-  });
+function newPhotographer(city, country, id, name, portrait, price, tagline) {
+  return {
+    city,
+    country,
+    id,
+    name,
+    portrait,
+    price,
+    tagline,
+  };
 }
+
+newPhotographer(
+  photographerList.city,
+  photographerList.country,
+  photographerList.id,
+  photographerList.name,
+  photographerList.portrait,
+  photographerList.price,
+  photographerList.tagline,
+);
 
 function createNewPhotographerCard(photographerList) {
   photographerList.forEach((photographer) => {
@@ -59,17 +73,3 @@ function createNewPhotographerCard(photographerList) {
     photographerContainer.appendChild(card);
   });
 }
-
-function newPhotographer(city, country, id, name, portrait, price, tagline) {
-  return {
-    city,
-    country,
-    id,
-    name,
-    portrait,
-    price,
-    tagline,
-  };
-}
-
-console.log(photographerList);
