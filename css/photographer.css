@@ -27,6 +27,17 @@ section.banner-photographe {
   background-color: #fafafa;
   border-radius: 0.6rem;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+
+  animation-name: fade-in;
+  -webkit-animation-name: fade-in;
+
+  animation-duration: 1s;
+  -webkit-animation-duration: 1s;
+
+  animation-timing-function: ease;
+  -webkit-animation-timing-function: ease;
+
+  visibility: visible !important;
 }
 
 .banner-text-wrapper {
@@ -236,6 +247,17 @@ section.grid-gallerie {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   column-gap: 2.8%;
+
+  animation-name: fade-in;
+  -webkit-animation-name: fade-in;
+
+  animation-duration: 1s;
+  -webkit-animation-duration: 1s;
+
+  animation-timing-function: ease;
+  -webkit-animation-timing-function: ease;
+
+  visibility: visible !important;
 }
 
 img.gallerie-img {
@@ -375,5 +397,14 @@ div.total-like-counter {
   }
   70% {
     transform: scale(1);
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }

@@ -61,7 +61,9 @@ function createNewPhotographerCard(photographerList) {
     card.innerHTML = `
     <header class="header-card">
     <a class="card-photographer-link" href="photographer.html?id=${photographer.id} " role="link">
-      <img src="sources/img/1_small/PhotographersID/${photographer.portrait}" alt="image portrait du photographe ${photographer.name}">
+    <div class='card-img-wrapper'> 
+    <img src="sources/img/1_small/PhotographersID/${photographer.portrait}" alt="image portrait du photographe ${photographer.name}">
+    </div>
       <h2 class="card-title">${photographer.name}</h2>
     </a>
   </header>

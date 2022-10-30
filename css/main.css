@@ -31,6 +31,17 @@ h1.main-title {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   margin: 70px auto;
+
+  animation-name: fade-in;
+  -webkit-animation-name: fade-in;
+
+  animation-duration: 1.4s;
+  -webkit-animation-duration: 1s;
+
+  animation-timing-function: ease;
+  -webkit-animation-timing-function: ease;
+
+  visibility: visible !important;
 }
 
 section.photographer-card {
@@ -47,6 +58,7 @@ section.photographer-card img {
   width: 160px;
   object-fit: cover;
   margin: auto;
+  transition: all 0.3s ease-in-out;
 }
 
 section.photographer-card a.card-photographer-link {
@@ -56,8 +68,17 @@ section.photographer-card a.card-photographer-link {
   display: inline-block;
 }
 
-section.photographer-card a.card-photographer-link:hover {
-  transform: scale(1.1);
+.card-img-wrapper {
+  height: 160px;
+  width: 160px;
+  overflow: hidden;
+  border-radius: 100%;
+  margin: auto;
+}
+
+section.photographer-card a.card-photographer-link:hover img {
+  transform: scale(1.2);
+  opacity: 80%;
 }
 
 section.photographer-card h2.card-title {
@@ -106,3 +127,12 @@ section.photographer-card p.cards-price {
 }
 
 /* Animations */
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
