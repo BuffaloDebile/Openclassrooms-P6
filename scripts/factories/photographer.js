@@ -32,27 +32,27 @@ window.addEventListener('load', () => {
   getPhotographers();
 });
 
-function newPhotographer(city, country, id, name, portrait, price, tagline) {
-  return {
-    city,
-    country,
-    id,
-    name,
-    portrait,
-    price,
-    tagline,
-  };
-}
+// function newPhotographer(city, country, id, name, portrait, price, tagline) {
+//   return {
+//     city,
+//     country,
+//     id,
+//     name,
+//     portrait,
+//     price,
+//     tagline,
+//   };
+// }
 
-newPhotographer(
-  photographerList.city,
-  photographerList.country,
-  photographerList.id,
-  photographerList.name,
-  photographerList.portrait,
-  photographerList.price,
-  photographerList.tagline,
-);
+// newPhotographer(
+//   photographerList.city,
+//   photographerList.country,
+//   photographerList.id,
+//   photographerList.name,
+//   photographerList.portrait,
+//   photographerList.price,
+//   photographerList.tagline,
+// );
 
 function createNewPhotographerCard(photographerList) {
   photographerList.forEach((photographer) => {

@@ -32,7 +32,8 @@
         <h1 class="title" lang="en">Ellie-Rose Wilkens</h1>
         <p class="location">Paris ,France</p>
         <p class="tagline">Capturer des compositions complexes</p>
-      </div><button class="banner-photographer-btn">Contacter-moi</button>
+      </div><button class="banner-photographer-btn" type="button" aria-haspopup="dialog" aria-controls="dialog"
+        aria-label="Contacter le photographe">Contacter-moi</button>
       <div class="banner-img"><img src="./sources/img/1_small/PhotographersID/EllieRoseWilkens.jpg"
           alt="Ellie-Rose Wilkens"></div>
     </section>
@@ -174,28 +175,39 @@
       <div class="price">250€/ jour</div>
     </div>
 
-    <!-- <div class="photograph-header">
-      <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
-    </div>  <!-- <div class="photograph-header">
-      <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
-    </div> -->
   </main>
-  <div id="contact_modal">
+  <div id="modal-window" id="dialog" role="dialog" aria-labelledby="dialog-title" aria-describedby="dialog-desc"
+    aria-modal="true" aria-hidden="true" tabindex="-1">
+    >
     <div class="modal">
       <header>
-        <h2>Contactez-moi</h2>
-        <img src="sources/icons/close.svg" onclick="closeModal()" />
+        <h2 class="modal-title">Contactez-moi<br><span class="form-photographer-name">Lisa</span></h2>
+        <img title="fermer le formulaire" aria-label="Fermer " role="button" src="sources/icons/close.svg" class="close-contact"/>
       </header>
-      <form>
-        <div>
-          <label>Prénom</label>
-          <input />
-        </div>
-        <button class="contact_button">Envoyer</button>
+      <form class="modal-form" id="contact">
+        <label for="prenom">Prénom</label>
+        <input class="input-prenom" id="prenom" type="text" name="prénom" aria-label="Entrez votre prénom"
+          aria-required="true">
+        <span class="message-erreur">Vous devez entrer votre prénom !</span>
+        <label for="nom">Nom</label>
+        <input class="input-nom" id="nom" type="text" name="nom" aria-label="Entrez votre nom" aria-required="true">
+        <span class=" message-erreur">Vous devez entrer votre nom !</span>
+        <label for="email">Email<br></label>
+        <input class="input-email" id="email" type="email" name="email" aria-label="entrez votre mail"
+          aria-required="true">
+        <span class="message-erreur">Vous devez entrer un Email valide !
+        </span>
+        <label for="message">Votre Message<br></label>
+        <textarea class="input-message" id="message" name="message" aria-required="true"></textarea>
+        <span class="message-erreur">Votre devez entrer un message ! </span>
+        <button class="submit-form" type="submit" value="Envoyer" aria-label="Envoyer le message">
+          Envoyer
+        </button>
       </form>
     </div>
   </div>
   <script type="module" src="./scripts/pages/photographer.js"></script>
+  <script type="module" src="./scripts/pages/modale.js"></script>
 </body>
 
 </html>
