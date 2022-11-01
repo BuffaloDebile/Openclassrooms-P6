@@ -1,12 +1,32 @@
-import { mediaList } from '../factories/photographer.js';
-import { photographerList } from '../factories/photographer.js';
-
 let photographerID = new URLSearchParams(document.location.search).get('id');
 let myPagePhotograph = [];
+let dataArray;
+let photographerList = [];
+let mediaList = [];
 
 const filterSelect = document.querySelector('.filter-select');
 const filterSelectTop = document.querySelector('.filter-select-top');
 const filterOption = document.querySelectorAll('.filter-option');
+
+async function fetchData() {
+  try {
+    const response = await fetch(linkToData);
+
+    const results = await response.json();
+
+    dataArray = results;
+
+    dataArray.photographers.forEach((photographer) => {
+      photographerList.push(photographer);
+    });
+
+    dataArray.media.forEach((media) => {
+      mediaList.push(media);
+    });
+  } catch (error) {
+    console.log(`Une erreur est survenu ! `);
+  }
+}
 
 function openSortFilter(e) {
   filterSelect.classList.toggle('open');
@@ -59,6 +79,6 @@ function handleDropdownSelection(e) {
 
 filterSelect.addEventListener('click', openSortFilter);
 
-for (const filter of filterOption) {
+filterOption.forEach((filter) => {
   filter.addEventListener('click', handleDropdownSelection);
-}
+});

@@ -25,7 +25,7 @@
   <header class="header">
     <a href="index.html"><img src="sources/img/logo/logo.svg" class="logo" /></a>
   </header>
-  <main id="main-photographe">
+  <main id="main-photographe" aria-hidden="false">
 
     <section class="banner-photographe" id="banner" role="banner">
       <div class="banner-text-wrapper">
@@ -182,7 +182,8 @@
     <div class="modal">
       <header>
         <h2 class="modal-title">Contactez-moi<br><span class="form-photographer-name">Lisa</span></h2>
-        <img title="fermer le formulaire" aria-label="Fermer " role="button" src="sources/icons/close.svg" class="close-contact"/>
+        <img title="fermer le formulaire" aria-label="Fermer " role="button" src="sources/icons/close.svg"
+          class="close-contact" />
       </header>
       <form class="modal-form" id="contact">
         <label for="prenom">Prénom</label>
@@ -199,7 +200,7 @@
         </span>
         <label for="message">Votre Message<br></label>
         <textarea class="input-message" id="message" name="message" aria-required="true"></textarea>
-        <span class="message-erreur">Votre devez entrer un message ! </span>
+        <span class="message-erreur">Votre devez entrer un message valide ! (150 caractères max) </span>
         <button class="submit-form" type="submit" value="Envoyer" aria-label="Envoyer le message">
           Envoyer
         </button>

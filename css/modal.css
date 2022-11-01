@@ -2,7 +2,6 @@
   visibility: visible;
   opacity: 1;
   transition: 0.2s 0.2s ease-out;
-  animation-name: opacity, visibility;
 }
 
 #modal-window.open .modal {
@@ -10,9 +9,10 @@
   transition: transform 0.2s 0.2s ease-out;
 }
 
-body.modal-open {
+body.modal-open-antiscroll {
   overflow: hidden;
   position: fixed;
+  width: 100%;
 }
 
 #modal-window {
@@ -27,7 +27,6 @@ body.modal-open {
   z-index: 100;
   opacity: 0;
   transition: 0.2s ease-out;
-  animation-name: opacity, visibility;
 }
 
 .modal {
@@ -94,6 +93,8 @@ form input {
   border: none;
   border-radius: 5px;
   outline: none;
+  font-size: 1.5rem;
+  padding: 0 1rem;
 }
 
 span.message-erreur {
@@ -116,6 +117,8 @@ textarea.input-message {
   resize: none;
   max-height: 8rem;
   height: 8rem;
+  font-size: 1.5rem;
+  padding: 0 1rem;
 }
 
 button.submit-form {
@@ -146,5 +149,22 @@ a:focus-visible {
   to {
     opacity: 1;
     transform: translate(-50% -50%);
+  }
+}
+
+@keyframes shake {
+  33% {
+    transform: translateX(-5px);
+  }
+  66% {
+    transform: translateX(5px);
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .modal {
+    width: 90%;
+    padding: 20px 10px;
+    overflow: hidden;
   }
 }

@@ -1,14 +1,12 @@
-export { photographerList, mediaList };
+document.addEventListener('DOMContentLoaded', () => {
+  const linkToData = '././data/photographers.json';
+  const photographerContainer = document.querySelector(
+    '.photographer-container',
+  );
 
-const linkToData = '././data/photographers.json';
-const photographerContainer = document.querySelector('.photographer-container');
+  let dataArray;
 
-let dataArray;
-let photographerList = [];
-let mediaList = [];
-
-window.addEventListener('load', () => {
-  async function getPhotographers() {
+  async function createPhotographers() {
     try {
       const response = await fetch(linkToData);
 
@@ -16,49 +14,39 @@ window.addEventListener('load', () => {
 
       dataArray = results;
 
-      dataArray.photographers.forEach((photographer) => {
-        photographerList.push(photographer);
-      });
-
-      dataArray.media.forEach((media) => {
-        mediaList.push(media);
-      });
-
-      createNewPhotographerCard(photographerList);
+      createNewPhotographerCard(dataArray.photographers);
     } catch (error) {
       console.log(`Une erreur est survenu ! `);
     }
   }
-  getPhotographers();
-});
+  createPhotographers();
+  // function newPhotographer(city, country, id, name, portrait, price, tagline) {
+  //   return {
+  //     city,
+  //     country,
+  //     id,
+  //     name,
+  //     portrait,
+  //     price,
+  //     tagline,
+  //   };
+  // }
 
-// function newPhotographer(city, country, id, name, portrait, price, tagline) {
-//   return {
-//     city,
-//     country,
-//     id,
-//     name,
-//     portrait,
-//     price,
-//     tagline,
-//   };
-// }
+  // newPhotographer(
+  //   photographerList.city,
+  //   photographerList.country,
+  //   photographerList.id,
+  //   photographerList.name,
+  //   photographerList.portrait,
+  //   photographerList.price,
+  //   photographerList.tagline,
+  // );
 
-// newPhotographer(
-//   photographerList.city,
-//   photographerList.country,
-//   photographerList.id,
-//   photographerList.name,
-//   photographerList.portrait,
-//   photographerList.price,
-//   photographerList.tagline,
-// );
-
-function createNewPhotographerCard(photographerList) {
-  photographerList.forEach((photographer) => {
-    const card = document.createElement('section');
-    card.className = 'photographer-card';
-    card.innerHTML = `
+  function createNewPhotographerCard(photographerList) {
+    photographerList.forEach((photographer) => {
+      const card = document.createElement('section');
+      card.className = 'photographer-card';
+      card.innerHTML = `
     <header class="header-card">
     <a class="card-photographer-link" href="photographer.html?id=${photographer.id} " role="link">
     <div class='card-img-wrapper'> 
@@ -72,6 +60,7 @@ function createNewPhotographerCard(photographerList) {
     <p class="cards-tagline">${photographer.tagline}</p>
     <p class="cards-price">${photographer.price}€/Jour</p>
   </div>`;
-    photographerContainer.appendChild(card);
-  });
-}
+      photographerContainer.appendChild(card);
+    });
+  }
+});

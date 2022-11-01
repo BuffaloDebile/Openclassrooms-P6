@@ -4,5 +4,105 @@ const errorMsgContact = document.querySelectorAll('.message-erreur');
 const submitContact = document.querySelector('.submit-form');
 const formInputs = document.querySelectorAll('form.modal-form input');
 const formTextArea = document.querySelector('textarea.input-message');
+const modalWindow = document.getElementById('modal-window');
+const mainContent = document.getElementById('main-photographe');
 
-console.log(formTextArea);
+console.log(formInputs);
+console.log(errorMsgContact);
+
+const regexEmail =
+  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+const inputsValidity = {
+  name: false,
+  lastName: false,
+  email: false,
+  message: false,
+};
+
+function openContactModal() {
+  modalWindow.classList.add('open');
+  document.body.classList.add('modal-open-antiscroll');
+  modalWindow.ariaHidden = 'false';
+  mainContent.ariaHidden = 'true';
+}
+
+function closeContactModal() {
+  modalWindow.classList.remove('open');
+  document.body.classList.remove('modal-open-antiscroll');
+  modalWindow.ariaHidden = 'true';
+  mainContent.ariaHidden = 'false';
+}
+
+function showValidation(errorMsgIndex, inputindex, isvalid) {
+  if (isvalid) {
+    errorMsgContact[errorMsgIndex].style.display = 'none';
+    formInputs[inputindex].style.outline = 'none';
+  } else {
+    errorMsgContact[errorMsgIndex].style.display = 'block';
+    formInputs[inputindex].style.outline = '2px solid red';
+  }
+}
+
+function nameValidation() {
+  if (formInputs[0].value.length >= 3) {
+    inputsValidity.name = true;
+    showValidation(0, 0, true);
+  } else {
+    inputsValidity.name = false;
+    showValidation(0, 0, false);
+  }
+}
+
+function lastnameValidation() {
+  if (formInputs[1].value.length >= 3) {
+    inputsValidity.lastName = true;
+    showValidation(1, 1, true);
+  } else {
+    inputsValidity.lastName = false;
+    showValidation(1, 1, false);
+  }
+}
+
+function emailValidation() {
+  if (regexEmail.test(formInputs[2].value)) {
+    inputsValidity.email = true;
+    showValidation(2, 2, true);
+  } else {
+    inputsValidity.email = false;
+    showValidation(2, 2, false);
+  }
+}
+
+function textareaValidation() {
+  if (formTextArea.value.length >= 3 && formTextArea.value.length <= 150) {
+    errorMsgContact[3].style.display = 'none';
+    formTextArea.style.outline = 'none';
+    inputsValidity.message = true;
+  } else {
+    errorMsgContact[3].style.display = 'block';
+    formTextArea.style.outline = '2px solid red';
+  }
+}
+
+btnContact.addEventListener('click', openContactModal);
+closeContact.addEventListener('click', closeContactModal);
+
+formInputs[0].addEventListener('blur', nameValidation);
+formInputs[0].addEventListener('input', nameValidation);
+
+formInputs[1].addEventListener('blur', lastnameValidation);
+formInputs[1].addEventListener('input', lastnameValidation);
+
+formInputs[2].addEventListener('blur', emailValidation);
+formInputs[2].addEventListener('input', emailValidation);
+
+formTextArea.addEventListener('blur', textareaValidation);
+formTextArea.addEventListener('input', textareaValidation);
+
+// Close modal on click outside
+window.onclick = (e) => {
+  if (e.target == modalWindow) {
+    closeContactModal();
+  }
+};
