@@ -1,12 +1,13 @@
 #modal-window.open {
   visibility: visible;
   opacity: 1;
-  transition: 0.2s 0.2s ease-out;
+  transition: opacity 0.3s ease-out, visibility 0.3s ease-out;
 }
 
 #modal-window.open .modal {
+  opacity: 1;
   transform: translate(-50%, -50%);
-  transition: transform 0.2s 0.2s ease-out;
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
 }
 
 body.modal-open-antiscroll {
@@ -26,19 +27,20 @@ body.modal-open-antiscroll {
   overflow: hidden;
   z-index: 100;
   opacity: 0;
-  transition: 0.2s ease-out;
+  transition: opacity 0.2s 0.2s ease-out, visibility 0.2s 0.2s ease-out;
 }
 
 .modal {
   border-radius: 5px;
   background-color: #db8876;
+  opacity: 0;
   width: 50%;
   padding: 35px;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, calc(-50% - 50px));
-  transition: transform 0.2s ease-out;
+  transition: opacity 0.3s 0.1s ease-out, transform 0.3s 0.1s ease-out;
 }
 
 .modal header {
