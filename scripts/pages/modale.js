@@ -6,9 +6,11 @@ const formInputs = document.querySelectorAll('form.modal-form input');
 const formTextArea = document.querySelector('textarea.input-message');
 const modalWindow = document.getElementById('modal-window');
 const mainContent = document.getElementById('main-photographe');
+const form = document.querySelector('form#contact');
+const modalTitle = document.querySelector('.modal-title');
+const thankYou = document.querySelector('.modal-thanks');
 
-console.log(formInputs);
-console.log(errorMsgContact);
+let isAnimating = false;
 
 const regexEmail =
   /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -25,6 +27,8 @@ function openContactModal() {
   document.body.classList.add('modal-open-antiscroll');
   modalWindow.ariaHidden = 'false';
   mainContent.ariaHidden = 'true';
+  thankYou.style.display = 'none';
+  modalTitle.style.display = 'block';
 }
 
 function closeContactModal() {
@@ -32,6 +36,9 @@ function closeContactModal() {
   document.body.classList.remove('modal-open-antiscroll');
   modalWindow.ariaHidden = 'true';
   mainContent.ariaHidden = 'false';
+  form.style.display = 'block';
+  thankYou.style.display = 'none';
+  modalTitle.style.display = 'block';
 }
 
 function showValidation(errorMsgIndex, inputindex, isvalid) {
@@ -75,13 +82,49 @@ function emailValidation() {
 }
 
 function textareaValidation() {
-  if (formTextArea.value.length >= 3 && formTextArea.value.length <= 150) {
+  if (formTextArea.value.length >= 10 && formTextArea.value.length <= 150) {
     errorMsgContact[3].style.display = 'none';
     formTextArea.style.outline = 'none';
     inputsValidity.message = true;
   } else {
     errorMsgContact[3].style.display = 'block';
     formTextArea.style.outline = '2px solid red';
+  }
+}
+
+function resetFormafterSubmit() {
+  formInputs.forEach((input) => {
+    console.log(input.value);
+  });
+  console.log(formTextArea.value);
+  form.reset();
+}
+
+function handleForm(e) {
+  e.preventDefault();
+
+  const keys = Object.keys(inputsValidity);
+
+  const failedInputs = keys.filter((key) => !inputsValidity[key]);
+
+  if (failedInputs.length && !isAnimating) {
+    isAnimating = true;
+    form.classList.add('shake');
+
+    nameValidation();
+    lastnameValidation();
+    emailValidation();
+    textareaValidation();
+
+    setTimeout(() => {
+      form.classList.remove('shake');
+    }, 400);
+    isAnimating = false;
+  } else {
+    form.style.display = 'none';
+    thankYou.style.display = 'block';
+    modalTitle.style.display = 'none';
+    resetFormafterSubmit();
   }
 }
 
@@ -99,6 +142,8 @@ formInputs[2].addEventListener('input', emailValidation);
 
 formTextArea.addEventListener('blur', textareaValidation);
 formTextArea.addEventListener('input', textareaValidation);
+
+form.addEventListener('submit', handleForm);
 
 // Close modal on click outside
 window.onclick = (e) => {

@@ -1,13 +1,18 @@
 #modal-window.open {
   visibility: visible;
   opacity: 1;
-  transition: opacity 0.3s ease-out, visibility 0.3s ease-out;
+  transition: opacity 0.3s ease-out;
 }
 
 #modal-window.open .modal {
   opacity: 1;
+  visibility: visible;
   transform: translate(-50%, -50%);
-  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+  transition: opacity 0.4s ease-out, transform 0.4s ease-out, visibility 0.1s;
+}
+
+#modal-window.open form.shake {
+  animation: shake 0.4s !important;
 }
 
 body.modal-open-antiscroll {
@@ -27,20 +32,22 @@ body.modal-open-antiscroll {
   overflow: hidden;
   z-index: 100;
   opacity: 0;
-  transition: opacity 0.2s 0.2s ease-out, visibility 0.2s 0.2s ease-out;
+  transition: opacity 0.4s ease-out, visibility 0.4s ease-out;
 }
 
 .modal {
   border-radius: 5px;
   background-color: #db8876;
   opacity: 0;
+  visibility: hidden;
   width: 50%;
   padding: 35px;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, calc(-50% - 50px));
-  transition: opacity 0.3s 0.1s ease-out, transform 0.3s 0.1s ease-out;
+  transition: opacity 0.4s ease-out, transform 0.3s ease-out,
+    visibility 0.2s ease-out;
 }
 
 .modal header {
@@ -50,6 +57,11 @@ body.modal-open-antiscroll {
 }
 
 h2.modal-title {
+  font-size: 3.3rem;
+}
+
+h2.modal-thanks {
+  display: none;
   font-size: 3.3rem;
 }
 
@@ -155,10 +167,16 @@ a:focus-visible {
 }
 
 @keyframes shake {
-  33% {
+  20% {
     transform: translateX(-5px);
   }
-  66% {
+  40% {
+    transform: translateX(5px);
+  }
+  60% {
+    transform: translateX(-5px);
+  }
+  80% {
     transform: translateX(5px);
   }
 }
