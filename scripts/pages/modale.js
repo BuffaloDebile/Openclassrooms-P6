@@ -39,6 +39,7 @@ function closeContactModal() {
   form.style.display = 'block';
   thankYou.style.display = 'none';
   modalTitle.style.display = 'block';
+  resetForm();
 }
 
 function showValidation(errorMsgIndex, inputindex, isvalid) {
@@ -92,12 +93,16 @@ function textareaValidation() {
   }
 }
 
-function resetFormafterSubmit() {
-  formInputs.forEach((input) => {
-    console.log(input.value);
-  });
-  console.log(formTextArea.value);
+function resetForm() {
   form.reset();
+  formInputs.forEach((input) => {
+    input.value = '';
+  });
+  formTextArea.value = '';
+  inputsValidity.name = false;
+  inputsValidity.lastName = false;
+  inputsValidity.email = false;
+  inputsValidity.message = false;
 }
 
 function handleForm(e) {
@@ -106,6 +111,8 @@ function handleForm(e) {
   const keys = Object.keys(inputsValidity);
 
   const failedInputs = keys.filter((key) => !inputsValidity[key]);
+
+  console.log(failedInputs);
 
   if (failedInputs.length && !isAnimating) {
     isAnimating = true;
@@ -124,7 +131,11 @@ function handleForm(e) {
     form.style.display = 'none';
     thankYou.style.display = 'block';
     modalTitle.style.display = 'none';
-    resetFormafterSubmit();
+    formInputs.forEach((input) => {
+      console.log(input.value);
+    });
+    console.log(formTextArea.value);
+    resetForm();
   }
 }
 

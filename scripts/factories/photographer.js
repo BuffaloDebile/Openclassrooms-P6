@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let dataArray;
 
-  async function createPhotographers() {
+  async function fetchPhotographers() {
     try {
       const response = await fetch(linkToData);
 
@@ -19,7 +19,8 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log(`Une erreur est survenu ! `);
     }
   }
-  createPhotographers();
+  fetchPhotographers();
+
   // function newPhotographer(city, country, id, name, portrait, price, tagline) {
   //   return {
   //     city,
