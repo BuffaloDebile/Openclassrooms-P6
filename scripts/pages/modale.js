@@ -1,4 +1,3 @@
-const btnContact = document.querySelector('.banner-photographer-btn');
 const closeContact = document.querySelector('.close-contact');
 const errorMsgContact = document.querySelectorAll('.message-erreur');
 const submitContact = document.querySelector('.submit-form');
@@ -139,22 +138,26 @@ function handleForm(e) {
   }
 }
 
-btnContact.addEventListener('click', openContactModal);
-closeContact.addEventListener('click', closeContactModal);
+window.onload = function () {
+  const btnContact = document.querySelector('.banner-photographer-btn');
+  btnContact.addEventListener('click', openContactModal);
 
-formInputs[0].addEventListener('blur', nameValidation);
-formInputs[0].addEventListener('input', nameValidation);
+  closeContact.addEventListener('click', closeContactModal);
 
-formInputs[1].addEventListener('blur', lastnameValidation);
-formInputs[1].addEventListener('input', lastnameValidation);
+  formInputs[0].addEventListener('blur', nameValidation);
+  formInputs[0].addEventListener('input', nameValidation);
 
-formInputs[2].addEventListener('blur', emailValidation);
-formInputs[2].addEventListener('input', emailValidation);
+  formInputs[1].addEventListener('blur', lastnameValidation);
+  formInputs[1].addEventListener('input', lastnameValidation);
 
-formTextArea.addEventListener('blur', textareaValidation);
-formTextArea.addEventListener('input', textareaValidation);
+  formInputs[2].addEventListener('blur', emailValidation);
+  formInputs[2].addEventListener('input', emailValidation);
 
-form.addEventListener('submit', handleForm);
+  formTextArea.addEventListener('blur', textareaValidation);
+  formTextArea.addEventListener('input', textareaValidation);
+
+  form.addEventListener('submit', handleForm);
+};
 
 // Close modal on click outside
 window.onclick = (e) => {

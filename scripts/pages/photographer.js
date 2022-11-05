@@ -1,8 +1,6 @@
 let photographerID = new URLSearchParams(document.location.search).get('id');
-let myPagePhotograph = [];
+const linkToData = '././data/photographers.json';
 let dataArray;
-let photographerList = [];
-let mediaList = [];
 
 const filterSelect = document.querySelector('.filter-select');
 const filterSelectTop = document.querySelector('.filter-select-top');
@@ -16,17 +14,52 @@ async function fetchData() {
 
     dataArray = results;
 
-    dataArray.photographers.forEach((photographer) => {
-      photographerList.push(photographer);
-    });
-
-    dataArray.media.forEach((media) => {
-      mediaList.push(media);
-    });
+    return dataArray;
   } catch (error) {
     console.log(`Une erreur est survenu ! `);
   }
 }
+
+fetchData();
+
+dataArray = await fetchData();
+
+function returnFilteredPhotograph() {
+  const filter = dataArray.photographers.filter(
+    (photographers) => photographers.id == photographerID,
+  );
+  return filter[0];
+}
+
+function returnFilteredMedias() {
+  const filter = dataArray.media.filter(
+    (media) => media.photographerId == photographerID,
+  );
+  return filter;
+}
+const myPagePhotograph = returnFilteredPhotograph();
+const myPagePhotographMedias = returnFilteredMedias();
+
+console.log(myPagePhotograph, myPagePhotographMedias);
+
+function displayBannerPhotograph(myPagePhotograph) {
+  const photographBanner = document.querySelector('.banner-photographe');
+  photographBanner.innerHTML = `
+
+      <div class="banner-text-wrapper">
+        <h1 class="title" lang="en">${myPagePhotograph.name}</h1>
+        <p class="location">${myPagePhotograph.city} ,${myPagePhotograph.country}</p>
+        <p class="tagline">${myPagePhotograph.tagline}</p></div>
+        <button class="banner-photographer-btn" type="button" aria-haspopup="dialog" aria-controls="dialog"
+        aria-label="Contacter ${myPagePhotograph.name}">Contacter ${myPagePhotograph.name}</button>
+        <div class="banner-img"><img src="./sources/img/1_small/PhotographersID/${myPagePhotograph.portrait}" alt="${myPagePhotograph.name}"></div>`;
+}
+
+function displayGalleryPhotograph(myPagePhotographMedias) {
+  
+}
+
+displayBannerPhotograph(myPagePhotograph);
 
 function openSortFilter(e) {
   filterSelect.classList.toggle('open');
