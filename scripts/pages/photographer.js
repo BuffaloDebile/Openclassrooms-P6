@@ -5,6 +5,7 @@ let dataArray;
 const filterSelect = document.querySelector('.filter-select');
 const filterSelectTop = document.querySelector('.filter-select-top');
 const filterOption = document.querySelectorAll('.filter-option');
+let TotalPhotographerLikes = [];
 
 async function fetchData() {
   try {
@@ -55,10 +56,31 @@ function displayBannerPhotograph(myPagePhotograph) {
         <div class="banner-img"><img src="./sources/img/1_small/PhotographersID/${myPagePhotograph.portrait}" alt="${myPagePhotograph.name}"></div>`;
 }
 
-function displayGalleryPhotograph(myPagePhotographMedias) {
-  
+function displayTotalCounter(myPagePhotograph, myPagePhotographMedias) {
+  const totalLike = document.querySelector('.total-like span');
+  const price = document.querySelector('.price');
+
+  price.innerText = `${myPagePhotograph.price}€/ jour`;
+
+  getTotalLikes(myPagePhotographMedias);
+
+  totalLike.innerText = TotalPhotographerLikes;
 }
 
+function getTotalLikes(myPagePhotographMedias) {
+  let allLikes = [];
+
+  myPagePhotographMedias.forEach((media) => {
+    allLikes.push(media.likes);
+  });
+
+  TotalPhotographerLikes = allLikes.reduce(
+    (sum, currentLikes) => sum + currentLikes,
+    0,
+  );
+}
+
+displayTotalCounter(myPagePhotograph, myPagePhotographMedias);
 displayBannerPhotograph(myPagePhotograph);
 
 function openSortFilter(e) {
