@@ -4,6 +4,7 @@ const submitContact = document.querySelector('.submit-form');
 const formInputs = document.querySelectorAll('form.modal-form input');
 const formTextArea = document.querySelector('textarea.input-message');
 const modalWindow = document.getElementById('modal-window');
+const modal = document.querySelector('.modal');
 const mainContent = document.getElementById('main-photographe');
 const form = document.querySelector('form#contact');
 const modalTitle = document.querySelector('.modal-title');
@@ -22,6 +23,7 @@ const inputsValidity = {
 };
 
 function openContactModal() {
+  modal.style.visibility = 'visible;';
   modalWindow.classList.add('open');
   document.body.classList.add('modal-open-antiscroll');
   modalWindow.ariaHidden = 'false';

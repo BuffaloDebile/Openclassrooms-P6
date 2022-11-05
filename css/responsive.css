@@ -31,4 +31,10 @@
   div.img-wrapper {
     height: 18rem;
   }
+
+  .total-like-counter {
+    left: 50%;
+    right: 50%;
+    transform: translate(-50%, 0);
+  }
 }

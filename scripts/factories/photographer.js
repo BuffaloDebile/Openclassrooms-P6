@@ -47,6 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
     photographerList.forEach((photographer) => {
       const card = document.createElement('section');
       card.className = 'photographer-card';
+      
       card.innerHTML = `
     <header class="header-card">
     <a class="card-photographer-link" href="photographer.html?id=${photographer.id} " role="link">

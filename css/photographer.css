@@ -31,8 +31,8 @@ section.banner-photographe {
   animation-name: fade-in;
   -webkit-animation-name: fade-in;
 
-  animation-duration: 1s;
-  -webkit-animation-duration: 1s;
+  animation-duration: 2s;
+  -webkit-animation-duration: 2s;
 
   animation-timing-function: ease;
   -webkit-animation-timing-function: ease;
@@ -251,8 +251,8 @@ section.grid-gallerie {
   animation-name: fade-in;
   -webkit-animation-name: fade-in;
 
-  animation-duration: 1s;
-  -webkit-animation-duration: 1s;
+  animation-duration: 2s;
+  -webkit-animation-duration: 2s;
 
   animation-timing-function: ease;
   -webkit-animation-timing-function: ease;
@@ -286,6 +286,14 @@ article.card {
 div.img-wrapper {
   overflow: hidden;
   border-radius: 0.6rem;
+  height: 22rem;
+  max-height: 22rem;
+}
+
+div.img-wrapper video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 a.card-wrapper:hover img {
@@ -351,6 +359,7 @@ div.total-like-counter {
   justify-content: center;
   align-items: center;
   border-radius: 0.8rem 0.8rem 0 0;
+  width: fit-content;
 }
 
 .total-like {
