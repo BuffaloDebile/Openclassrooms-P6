@@ -38,3 +38,9 @@
     transform: translate(-50%, 0);
   }
 }
+
+@media only screen and (max-width: 1240px) {
+  section.filter {
+    padding: 10px 50px;
+  }
+}

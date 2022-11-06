@@ -9,6 +9,18 @@ const gallery = document.querySelector('.grid-gallerie');
 let TotalPhotographerLikes = [];
 const PageTitle = document.querySelector('title');
 
+class Media {
+  constructor(media, title, likes, date) {
+    this.media = media;
+    this.title = title;
+    this.likes = likes;
+    this.date = date;
+    this.photographerName = myPagePhotograph.name
+      .toLowerCase()
+      .replace(' ', '');
+  }
+}
+
 async function fetchData() {
   try {
     const response = await fetch(linkToData);
@@ -43,8 +55,6 @@ function returnFilteredMedias() {
 const myPagePhotograph = returnFilteredPhotograph();
 const myPagePhotographMedias = returnFilteredMedias();
 
-console.log(myPagePhotographMedias);
-
 function displayBannerPhotograph(myPagePhotograph) {
   const photographBanner = document.querySelector('.banner-photographe');
   photographBanner.innerHTML = `
@@ -64,19 +74,8 @@ function displayBannerPhotograph(myPagePhotograph) {
   PageTitle.innerText = `Fisheye - ${myPagePhotograph.name}`;
 }
 
-function displayCardsPhotograph(myPagePhotographMedias, myPagePhotograph) {
-  class Media {
-    constructor(media, title, likes, dates) {
-      this.media = media;
-      this.title = title;
-      this.likes = likes;
-      this.dates = dates;
-      this.photographerName = myPagePhotograph.name
-        .toLowerCase()
-        .replace(' ', '');
-    }
-  }
-  myPagePhotographMedias.forEach((media) => {
+function displayCardsPhotograph(myPagePhotographMedias) {
+  myPagePhotographMedias.forEach((media, index) => {
     media = new Media(
       media.image || media.video,
       media.title,
@@ -84,7 +83,6 @@ function displayCardsPhotograph(myPagePhotographMedias, myPagePhotograph) {
       media.date,
       media.photographerName,
     );
-
     const card = document.createElement('article');
     card.className = 'card';
 
@@ -111,7 +109,7 @@ function displayCardsPhotograph(myPagePhotographMedias, myPagePhotograph) {
         media.likes
       }</p>
           <button class="heart-link" aria-label="aimer cette photo" role="button">
-            <i class="heart far fa-heart fa-2xl"></i>
+            <i class="heart-icon far fa-heart fa-2xl"></i>
           </button>
         </div>
       </div>`;
@@ -133,7 +131,7 @@ function displayCardsPhotograph(myPagePhotographMedias, myPagePhotograph) {
         media.likes
       }</p>
         <button class="heart-link" aria-label="aimer cette photo" role="button">
-          <i class="heart far fa-heart fa-2xl"></i>
+          <i class="heart-icon far fa-heart fa-2xl"></i>
         </button>
       </div>
     </div>`;
@@ -150,18 +148,19 @@ function displayCardsPhotograph(myPagePhotographMedias, myPagePhotograph) {
         <div class="heart-like">
           <p class="like-counter" aria-label="Nombre de likes : error</p>
           <button class="heart-link" aria-label="aimer cette photo" role="button">
-            <i class="heart far fa-heart fa-2xl"></i>
+            <i class="heart-icon far fa-heart fa-2xl"></i>
           </button>
         </div>
       </div>`;
     }
-
     gallery.appendChild(card);
+
+    likeMedia(index, media.likes);
   });
 }
 
 function displayTotalCounter(myPagePhotograph, myPagePhotographMedias) {
-  const totalLike = document.querySelector('.total-like span');
+  let totalLike = document.querySelector('.total-like span');
   const price = document.querySelector('.price');
 
   price.innerText = `${myPagePhotograph.price}€/ jour`;
@@ -184,9 +183,25 @@ function getTotalLikes(myPagePhotographMedias) {
   );
 }
 
-displayCardsPhotograph(myPagePhotographMedias, myPagePhotograph);
-displayTotalCounter(myPagePhotograph, myPagePhotographMedias);
-displayBannerPhotograph(myPagePhotograph);
+function likeMedia(index, media) {
+  const likeBtn = document.querySelectorAll('.heart-link');
+  const likeIcon = document.querySelectorAll('i.heart-icon');
+  const likeCount = document.querySelectorAll('.like-counter');
+  let totalLike = document.querySelector('.total-like span');
+  likeBtn[index].addEventListener('click', () => {
+    if (likeIcon[index].classList.contains('far')) {
+      likeIcon[index].classList.remove('far');
+      likeIcon[index].classList.add('fas');
+      likeIcon[index].classList.add('pulse');
+      likeCount[index].innerText = ++media;
+    } else if (likeIcon[index].classList.contains('fas')) {
+      likeIcon[index].classList.remove('fas');
+      likeIcon[index].classList.add('far');
+      likeIcon[index].classList.remove('pulse');
+      likeCount[index].innerText = --media;
+    }
+  });
+}
 
 function openSortFilter(e) {
   filterSelect.classList.toggle('open');
@@ -247,3 +262,6 @@ filterOption.forEach((filter) => {
 window.addEventListener('load', function () {
   document.body.classList.remove('preload');
 });
+displayBannerPhotograph(myPagePhotograph);
+displayCardsPhotograph(myPagePhotographMedias);
+displayTotalCounter(myPagePhotograph, myPagePhotographMedias);
