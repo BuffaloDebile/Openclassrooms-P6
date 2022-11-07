@@ -369,6 +369,7 @@ div.total-like-counter {
   align-items: center;
   border-radius: 0.8rem 0.8rem 0 0;
   width: fit-content;
+  min-width: 23rem;
 }
 
 .total-like {

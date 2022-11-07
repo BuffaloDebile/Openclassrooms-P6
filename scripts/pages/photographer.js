@@ -210,6 +210,7 @@ function likeMedia(index, media) {
 }
 
 function openSortFilter(e) {
+  e.preventDefault();
   filterSelect.classList.toggle('open');
 
   filterSelectTop.ariaExpanded === 'false'
@@ -218,6 +219,7 @@ function openSortFilter(e) {
 }
 
 function handleDropdownSelection(e) {
+  e.preventDefault();
   const filterChosen = document.querySelector('.chosen');
 
   let clickedValue = e.target;

@@ -23,7 +23,7 @@ const inputsValidity = {
 };
 
 function openContactModal() {
-  modal.style.visibility = 'visible;';
+  modal.style.visibility = 'visible';
   modalWindow.classList.add('open');
   document.body.classList.add('modal-open-antiscroll');
   modalWindow.ariaHidden = 'false';
@@ -33,6 +33,7 @@ function openContactModal() {
 }
 
 function closeContactModal() {
+  modal.style.visibility = 'hidden';
   modalWindow.classList.remove('open');
   document.body.classList.remove('modal-open-antiscroll');
   modalWindow.ariaHidden = 'true';
@@ -142,9 +143,14 @@ function handleForm(e) {
 window.onload = function () {
   const btnContact = document.querySelector('.banner-photographer-btn');
   btnContact.addEventListener('click', openContactModal);
-  closeContact.addEventListener('click', closeContactModal);
-};
 
+  closeContact.addEventListener('click', closeContactModal);
+  document.addEventListener('keydown', (evt) => {
+    if (evt.key === 'Escape' && modal.style.visibility == 'visible') {
+      closeContactModal();
+    }
+  });
+};
 formInputs[0].addEventListener('blur', nameValidation);
 formInputs[0].addEventListener('input', nameValidation);
 
