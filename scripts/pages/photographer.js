@@ -55,6 +55,10 @@ function returnFilteredMedias() {
 const myPagePhotograph = returnFilteredPhotograph();
 const myPagePhotographMedias = returnFilteredMedias();
 
+displayCardsPhotograph(myPagePhotographMedias);
+displayTotalCounter(myPagePhotograph, myPagePhotographMedias);
+displayBannerPhotograph(myPagePhotograph);
+
 function displayBannerPhotograph(myPagePhotograph) {
   const photographBanner = document.querySelector('.banner-photographe');
   photographBanner.innerHTML = `
@@ -264,6 +268,3 @@ filterOption.forEach((filter) => {
 window.addEventListener('load', function () {
   document.body.classList.remove('preload');
 });
-displayBannerPhotograph(myPagePhotograph);
-displayCardsPhotograph(myPagePhotographMedias);
-displayTotalCounter(myPagePhotograph, myPagePhotographMedias);

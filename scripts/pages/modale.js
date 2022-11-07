@@ -139,12 +139,11 @@ function handleForm(e) {
     resetForm();
   }
 }
-
 window.onload = function () {
   const btnContact = document.querySelector('.banner-photographer-btn');
   btnContact.addEventListener('click', openContactModal);
+  closeContact.addEventListener('click', closeContactModal);
 };
-closeContact.addEventListener('click', closeContactModal);
 
 formInputs[0].addEventListener('blur', nameValidation);
 formInputs[0].addEventListener('input', nameValidation);
