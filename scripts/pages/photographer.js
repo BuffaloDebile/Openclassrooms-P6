@@ -194,11 +194,13 @@ function likeMedia(index, media) {
       likeIcon[index].classList.add('fas');
       likeIcon[index].classList.add('pulse');
       likeCount[index].innerText = ++media;
+      totalLike.innerText = ++totalLike.innerText;
     } else if (likeIcon[index].classList.contains('fas')) {
       likeIcon[index].classList.remove('fas');
       likeIcon[index].classList.add('far');
       likeIcon[index].classList.remove('pulse');
       likeCount[index].innerText = --media;
+      totalLike.innerText = --totalLike.innerText;
     }
   });
 }

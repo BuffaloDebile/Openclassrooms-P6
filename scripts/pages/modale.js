@@ -142,7 +142,6 @@ function handleForm(e) {
 
 window.onload = function () {
   const btnContact = document.querySelector('.banner-photographer-btn');
-
   btnContact.addEventListener('click', openContactModal);
 };
 closeContact.addEventListener('click', closeContactModal);
