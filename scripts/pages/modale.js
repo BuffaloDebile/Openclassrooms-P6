@@ -142,24 +142,24 @@ function handleForm(e) {
 
 window.onload = function () {
   const btnContact = document.querySelector('.banner-photographer-btn');
+
   btnContact.addEventListener('click', openContactModal);
-
-  closeContact.addEventListener('click', closeContactModal);
-
-  formInputs[0].addEventListener('blur', nameValidation);
-  formInputs[0].addEventListener('input', nameValidation);
-
-  formInputs[1].addEventListener('blur', lastnameValidation);
-  formInputs[1].addEventListener('input', lastnameValidation);
-
-  formInputs[2].addEventListener('blur', emailValidation);
-  formInputs[2].addEventListener('input', emailValidation);
-
-  formTextArea.addEventListener('blur', textareaValidation);
-  formTextArea.addEventListener('input', textareaValidation);
-
-  form.addEventListener('submit', handleForm);
 };
+closeContact.addEventListener('click', closeContactModal);
+
+formInputs[0].addEventListener('blur', nameValidation);
+formInputs[0].addEventListener('input', nameValidation);
+
+formInputs[1].addEventListener('blur', lastnameValidation);
+formInputs[1].addEventListener('input', lastnameValidation);
+
+formInputs[2].addEventListener('blur', emailValidation);
+formInputs[2].addEventListener('input', emailValidation);
+
+formTextArea.addEventListener('blur', textareaValidation);
+formTextArea.addEventListener('input', textareaValidation);
+
+form.addEventListener('submit', handleForm);
 
 // Close modal on click outside
 window.onclick = (e) => {
