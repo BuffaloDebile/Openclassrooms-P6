@@ -9,6 +9,12 @@ const gallery = document.querySelector('.grid-gallerie');
 let TotalPhotographerLikes = [];
 const PageTitle = document.querySelector('title');
 
+const modalTitle = document.querySelector('.modal-title');
+const modalWindow = document.getElementById('modal-window');
+const modal = document.querySelector('.modal');
+const mainContent = document.getElementById('main-photographe');
+const thankYou = document.querySelector('.modal-thanks');
+
 class Media {
   constructor(media, title, likes, date) {
     this.media = media;
@@ -55,9 +61,9 @@ function returnFilteredMedias() {
 const myPagePhotograph = returnFilteredPhotograph();
 const myPagePhotographMedias = returnFilteredMedias();
 
+displayBannerPhotograph(myPagePhotograph);
 displayCardsPhotograph(myPagePhotographMedias);
 displayTotalCounter(myPagePhotograph, myPagePhotographMedias);
-displayBannerPhotograph(myPagePhotograph);
 
 function displayBannerPhotograph(myPagePhotograph) {
   const photographBanner = document.querySelector('.banner-photographe');
@@ -76,6 +82,10 @@ function displayBannerPhotograph(myPagePhotograph) {
   formName.innerText = myPagePhotograph.name;
 
   PageTitle.innerText = `Fisheye - ${myPagePhotograph.name}`;
+
+  const btnContact = document.querySelector('.banner-photographer-btn');
+
+  btnContact.addEventListener('click', openContactModal);
 }
 
 function displayCardsPhotograph(myPagePhotographMedias) {
@@ -161,6 +171,16 @@ function displayCardsPhotograph(myPagePhotographMedias) {
 
     likeMedia(index, media.likes);
   });
+}
+
+function openContactModal() {
+  modal.style.visibility = 'visible';
+  modalWindow.classList.add('open');
+  document.body.classList.add('modal-open-antiscroll');
+  modalWindow.ariaHidden = 'false';
+  mainContent.ariaHidden = 'true';
+  thankYou.style.display = 'none';
+  modalTitle.style.display = 'block';
 }
 
 function displayTotalCounter(myPagePhotograph, myPagePhotographMedias) {

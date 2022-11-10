@@ -10,6 +10,8 @@ const form = document.querySelector('form#contact');
 const modalTitle = document.querySelector('.modal-title');
 const thankYou = document.querySelector('.modal-thanks');
 
+const btnContact = document.querySelector('.banner-photographer-btn');
+
 let isAnimating = false;
 
 const regexEmail =
@@ -22,15 +24,6 @@ const inputsValidity = {
   message: false,
 };
 
-function openContactModal() {
-  modal.style.visibility = 'visible';
-  modalWindow.classList.add('open');
-  document.body.classList.add('modal-open-antiscroll');
-  modalWindow.ariaHidden = 'false';
-  mainContent.ariaHidden = 'true';
-  thankYou.style.display = 'none';
-  modalTitle.style.display = 'block';
-}
 
 function closeContactModal() {
   modal.style.visibility = 'hidden';
@@ -140,17 +133,16 @@ function handleForm(e) {
     resetForm();
   }
 }
-window.onload = function () {
-  const btnContact = document.querySelector('.banner-photographer-btn');
-  btnContact.addEventListener('click', openContactModal);
 
-  closeContact.addEventListener('click', closeContactModal);
-  document.addEventListener('keydown', (evt) => {
-    if (evt.key === 'Escape' && modal.style.visibility == 'visible') {
-      closeContactModal();
-    }
-  });
-};
+
+closeContact.addEventListener('click', closeContactModal);
+
+document.addEventListener('keydown', (evt) => {
+  if (evt.key === 'Escape' && modal.style.visibility == 'visible') {
+    closeContactModal();
+  }
+});
+
 formInputs[0].addEventListener('blur', nameValidation);
 formInputs[0].addEventListener('input', nameValidation);
 
