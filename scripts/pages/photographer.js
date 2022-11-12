@@ -15,6 +15,9 @@ const modal = document.querySelector('.modal');
 const mainContent = document.getElementById('main-photographe');
 const thankYou = document.querySelector('.modal-thanks');
 
+const lightBox = document.querySelector('.lightbox');
+const closeLightboxBtn = document.querySelector('button.fermer');
+
 class Media {
   constructor(media, title, likes, date) {
     this.media = media;
@@ -107,7 +110,9 @@ function displayCardsPhotograph(myPagePhotographMedias) {
       )
     ) {
       card.innerHTML = `
-      <a href="#" class="card-wrapper" role="button" aria-describedby="ouvrir le slider">
+      <a href="#" class="card-wrapper" role="button" aria-label="“${
+        media.title
+      }, closeup view”">
     
         <div class="img-wrapper">
           <img class="gallerie-img" src="./sources/img/1_small/${
@@ -124,12 +129,14 @@ function displayCardsPhotograph(myPagePhotographMedias) {
         media.likes
       }</p>
           <button class="heart-link" aria-label="aimer cette photo" role="button">
-            <i class="heart-icon far fa-heart fa-2xl"></i>
+            <i class="heart-icon far fa-heart fa-2xl" aria-label="likes"></i>
           </button>
         </div>
       </div>`;
     } else if (media.media.includes('.mp4' || '.avi' || '.mov')) {
-      card.innerHTML = ` <a href="#" class="card-wrapper" role="button" aria-describedby="ouvrir le slider">
+      card.innerHTML = ` <a href="#" class="card-wrapper" role="button" aria-label="“${
+        media.title
+      }, closeup view”">
 
       <div class="img-wrapper">
         <video playsinline autoplay muted loop>
@@ -146,13 +153,13 @@ function displayCardsPhotograph(myPagePhotographMedias) {
         media.likes
       }</p>
         <button class="heart-link" aria-label="aimer cette photo" role="button">
-          <i class="heart-icon far fa-heart fa-2xl"></i>
+          <i class="heart-icon far fa-heart fa-2xl" aria-label="likes"></i>
         </button>
       </div>
     </div>`;
     } else {
       card.innerHTML = `
-      <a href="#" class="card-wrapper" role="button" aria-describedby="ouvrir le slider">
+      <a href="#" class="card-wrapper" role="button" aria-label="“${media.title}, closeup view”">
     
         <div class="img-wrapper">
           <img   class="gallerie-img" src="./sources/img/1_small/nomedia/nomedia.jpg" alt="error no media found">
@@ -163,7 +170,7 @@ function displayCardsPhotograph(myPagePhotographMedias) {
         <div class="heart-like">
           <p class="like-counter" aria-label="Nombre de likes : error</p>
           <button class="heart-link" aria-label="aimer cette photo" role="button">
-            <i class="heart-icon far fa-heart fa-2xl"></i>
+            <i class="heart-icon far fa-heart fa-2xl" aria-label="likes"></i>
           </button>
         </div>
       </div>`;
@@ -301,7 +308,37 @@ function sortByDate() {
   myPagePhotographMedias.sort((a, b) => a.date.localeCompare(b.date));
 }
 
+function openLightbox() {
+  lightBox.style.display = 'block';
+}
+
+function closeLightBox() {
+  lightBox.style.display = 'none';
+}
+
+// LightBox
+
+function handleLightbox() {
+  const cards = document.querySelectorAll('.card');
+  const cardImg = document.querySelectorAll('.card-wrapper');
+
+  cards.forEach((card, index) => {
+    console.log(card, index);
+    cardImg[index].addEventListener('click', openLightbox);
+  });
+}
+
+handleLightbox();
+
 // Event Listeners
+
+closeLightboxBtn  .addEventListener('click', closeLightBox);
+
+document.addEventListener('keydown', (evt) => {
+  if (evt.key === 'Escape' && lightBox.style.display == 'block') {
+    closeLightBox();
+  }
+});
 
 filterSelect.addEventListener('click', openSortFilter);
 

@@ -43,17 +43,17 @@
       <div class="dropdown-menu">
         <div class="filter-select">
           <a href="#" role="button" class="filter-select-top" aria-controls="filter-options" aria-haspopup="listbox"
-            aria-label="Trier par" aria-expanded="false">
+            aria-label="Trier par" aria-expanded="false" aria-labelledby="trier">
             <span class="chosen">Popularité</span>
             <div class="arrow"></div>
           </a>
           <div class="filter-options-container" role="listbox" id="filter-options">
             <a href="#" class="filter-option selected" data-value="popularite" aria-selected="true"
-              aria-label="Trier par popularité" role="option">Popularité</a>
-            <a href="#" class="filter-option" data-value="date" aria-selected="false" aria-label="Trier par date"
-              role="option">Date</a>
-            <a href="#" class="filter-option" data-value="titre" aria-selected="false" aria-label="Trier par titre"
-              role="option">Titre</a>
+              aria-label="Trier par popularité" aria-labelledby="trier" role="option">Popularité</a>
+            <a href="#" class="filter-option" aria-labelledby="trier" data-value="date" aria-selected="false"
+              aria-label="Trier par date" role="option">Date</a>
+            <a href="#" class="filter-option" aria-labelledby="trier" data-value="titre" aria-selected="false"
+              aria-label="Trier par titre" role="option">Titre</a>
           </div>
         </div>
       </div>
@@ -108,9 +108,9 @@
     </div>
 
   </main>
-  <div id="modal-window" id="dialog" role="dialog" aria-labelledby="dialog-title" aria-describedby="dialog-desc"
-    aria-modal="true" aria-hidden="true" tabindex="-1">
-    >
+  <!-- Contact Form -->
+  <div id="modal-window" id="dialog" role="dialog" aria-labelledby="dialog-title" aria-modal="true" aria-hidden="true"
+    tabindex="-1">
     <div class="modal">
       <header>
         <h2 class="modal-title">Contactez-moi<br><span class="form-photographer-name">Lisa</span></h2>
@@ -119,20 +119,22 @@
           class="close-contact" />
       </header>
       <form class="modal-form" id="contact" autocomplete="off">
-        <label for="prenom">Prénom</label>
+        <label id="prenom" for="prenom">Prénom</label>
         <input class="input-prenom" id="prenom" type="text" name="prénom" aria-label="Entrez votre prénom"
-          aria-required="true">
+          aria-required="true" aria-labelledby="prenom">
         <span class="message-erreur">Vous devez entrer votre prénom !</span>
-        <label for="nom">Nom</label>
-        <input class="input-nom" id="nom" type="text" name="nom" aria-label="Entrez votre nom" aria-required="true">
+        <label id="nom" for="nom">Nom</label>
+        <input class="input-nom" id="nom" type="text" name="nom" aria-label="Entrez votre nom" aria-required="true"
+          aria-labelledby="nom">
         <span class=" message-erreur">Vous devez entrer votre nom !</span>
-        <label for="email">Email<br></label>
+        <label id="email" for="email">Email<br></label>
         <input class="input-email" id="email" type="email" name="email" aria-label="entrez votre mail"
-          aria-required="true" novalidate>
+          aria-required="true" aria-labelledby="email" novalidate>
         <span class="message-erreur">Vous devez entrer un Email valide !
         </span>
-        <label for="message">Votre Message<br></label>
-        <textarea class="input-message" id="message" name="message" aria-required="true"></textarea>
+        <label id="message" for="message">Votre Message<br></label>
+        <textarea class="input-message" id="message" name="message" aria-required="true"
+          aria-describedby="message"></textarea>
         <span class="message-erreur">Votre devez entrer un message valide ! (150 caractères max) </span>
         <button class="submit-form" type="submit" value="Envoyer" aria-label="Envoyer le message">
           Envoyer
@@ -140,6 +142,28 @@
       </form>
     </div>
   </div>
+  <!-- Lightbox slider -->
+  <section class="lightbox" role="dialog" aria-label="image closeup view open " aria-hidden="true" aria-modal="true">
+    <div class="lightbox-windows">
+      <ul class="container-slides">
+        <video src="sources/img/2_medium/mimikeel/Animals_Wild_Horses_in_the_mountains.mp4" alt="Chevaux sur une plaine"
+          autoplay="" loop=""></video>
+      </ul>
+      <div class="lightbox-btns">
+        <button class="gauche" aria-label="media precedent">
+          <em class="fas fa-chevron-left"></em>
+        </button>
+        <button class="droit" aria-label="media suivant">
+          <em class="fas fa-chevron-right"></em>
+        </button>
+        <button class="fermer" aria-label="Fermer Le carrousel">
+          <em class="fas fa-times close-lightbox-media"></em>
+        </button>
+
+        <h2 class="titre-lightbox">Animals Wild Horses in the mountains</h2>
+      </div>
+    </div>
+  </section>
   <script type="module" src="./scripts/pages/photographer.js"></script>
   <script type="module" defer src="./scripts/pages/modale.js"></script>
 </body>
