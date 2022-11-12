@@ -62,6 +62,7 @@ const myPagePhotograph = returnFilteredPhotograph();
 const myPagePhotographMedias = returnFilteredMedias();
 
 displayBannerPhotograph(myPagePhotograph);
+sortMediaByLike();
 displayCardsPhotograph(myPagePhotographMedias);
 displayTotalCounter(myPagePhotograph, myPagePhotographMedias);
 
@@ -75,7 +76,7 @@ function displayBannerPhotograph(myPagePhotograph) {
         <p class="tagline">${myPagePhotograph.tagline}</p></div>
         <button class="banner-photographer-btn" type="button" aria-haspopup="dialog" aria-controls="dialog"
         aria-label="Contacter ${myPagePhotograph.name}">Contacter ${myPagePhotograph.name}</button>
-        <div class="banner-img"><img src="./sources/img/1_small/PhotographersID/${myPagePhotograph.portrait}" alt="${myPagePhotograph.name}"></div>`;
+        <div class="banner-img"><img src="./sources/img/1_small/PhotographersID/${myPagePhotograph.portrait}" alt=" contacter ${myPagePhotograph.name}"></div>`;
 
   const formName = document.querySelector('.form-photographer-name');
 
@@ -173,6 +174,10 @@ function displayCardsPhotograph(myPagePhotographMedias) {
   });
 }
 
+function clearGalleryPhotograph() {
+  gallery.replaceChildren();
+}
+
 function openContactModal() {
   modal.style.visibility = 'visible';
   modalWindow.classList.add('open');
@@ -253,7 +258,9 @@ function handleDropdownSelection(e) {
 
     filterChosen.textContent = e.target.textContent;
 
-    console.log('Sort by date');
+    clearGalleryPhotograph();
+    sortByDate();
+    displayCardsPhotograph(myPagePhotographMedias);
   } else if (e.target.textContent === 'Titre') {
     filterOption.forEach((options) => {
       options.classList.remove('selected');
@@ -262,7 +269,9 @@ function handleDropdownSelection(e) {
 
     filterChosen.textContent = e.target.textContent;
 
-    console.log('Sort by Titre');
+    clearGalleryPhotograph();
+    sortMediaByTitle();
+    displayCardsPhotograph(myPagePhotographMedias);
   } else if (e.target.textContent === 'Popularité') {
     filterOption.forEach((options) => {
       options.classList.remove('selected');
@@ -272,10 +281,24 @@ function handleDropdownSelection(e) {
 
     filterChosen.textContent = e.target.textContent;
 
-    console.log('Sort by Popularité');
+    clearGalleryPhotograph();
+    sortMediaByLike();
+    displayCardsPhotograph(myPagePhotographMedias);
   } else {
     return;
   }
+}
+
+function sortMediaByLike() {
+  myPagePhotographMedias.sort((a, b) => b.likes - a.likes);
+}
+
+function sortMediaByTitle() {
+  myPagePhotographMedias.sort((a, b) => a.title.localeCompare(b.title));
+}
+
+function sortByDate() {
+  myPagePhotographMedias.sort((a, b) => a.date.localeCompare(b.date));
 }
 
 // Event Listeners

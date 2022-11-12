@@ -24,7 +24,6 @@ const inputsValidity = {
   message: false,
 };
 
-
 function closeContactModal() {
   modal.style.visibility = 'hidden';
   modalWindow.classList.remove('open');
@@ -133,7 +132,6 @@ function handleForm(e) {
     resetForm();
   }
 }
-
 
 closeContact.addEventListener('click', closeContactModal);
 
