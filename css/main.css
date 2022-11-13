@@ -54,7 +54,7 @@ h1.main-title {
 section.photographer-card {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   padding: 30px;
 }

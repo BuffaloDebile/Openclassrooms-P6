@@ -17,6 +17,8 @@ const thankYou = document.querySelector('.modal-thanks');
 
 const lightBox = document.querySelector('.lightbox');
 const closeLightboxBtn = document.querySelector('button.fermer');
+let mediaSrc = [];
+let mediaNames = [];
 
 class Media {
   constructor(media, title, likes, date) {
@@ -110,16 +112,18 @@ function displayCardsPhotograph(myPagePhotographMedias) {
       )
     ) {
       card.innerHTML = `
-      <a href="#" class="card-wrapper" role="button" aria-label="“${
+      <a href="#/${
+        media.photographerName
+      }" class="card-wrapper" role="button" aria-label="${
         media.title
-      }, closeup view”">
+      }, closeup view">
     
         <div class="img-wrapper">
           <img class="gallerie-img" src="./sources/img/1_small/${
             media.photographerName
           }/${media.media || media.video}" alt="image de la gallerie : ${
         media.title
-      }">
+      }" data-name="${media.title}">
         </div>
       </a>
       <div class="card-footer">
@@ -134,16 +138,17 @@ function displayCardsPhotograph(myPagePhotographMedias) {
         </div>
       </div>`;
     } else if (media.media.includes('.mp4' || '.avi' || '.mov')) {
-      card.innerHTML = ` <a href="#" class="card-wrapper" role="button" aria-label="“${
+      card.innerHTML = ` <a href="#/${
+        media.photographerName
+      }" class="card-wrapper" role="button" aria-label="${
         media.title
-      }, closeup view”">
-
+      }, closeup view">
       <div class="img-wrapper">
-        <video playsinline autoplay muted loop>
-          <source src="./sources/img/1_small/${media.photographerName}/${
+      <video src="./sources/img/1_small/${media.photographerName}/${
         media.media || media.video
-      }" alt="image de la gallerie : ${media.title}" type="video/mp4">
-        </video>
+      }" alt="image de la gallerie : ${media.title}" data-name="${
+        media.title
+      }" type="video/mp4" autoplay loop class="gallerie-img"></video>
       </div>
     </a>
     <div class="card-footer">
@@ -159,10 +164,10 @@ function displayCardsPhotograph(myPagePhotographMedias) {
     </div>`;
     } else {
       card.innerHTML = `
-      <a href="#" class="card-wrapper" role="button" aria-label="“${media.title}, closeup view”">
+      <a href="#/${media.photographerName}" class="card-wrapper" role="button" aria-label="${media.title}, closeup view">
     
         <div class="img-wrapper">
-          <img   class="gallerie-img" src="./sources/img/1_small/nomedia/nomedia.jpg" alt="error no media found">
+          <img class="gallerie-img" src="./sources/img/1_small/nomedia/nomedia.jpg" alt="error no media found" data-name="${media.title}">
         </div>
       </a>
       <div class="card-footer">
@@ -268,6 +273,7 @@ function handleDropdownSelection(e) {
     clearGalleryPhotograph();
     sortByDate();
     displayCardsPhotograph(myPagePhotographMedias);
+    handleLightbox();
   } else if (e.target.textContent === 'Titre') {
     filterOption.forEach((options) => {
       options.classList.remove('selected');
@@ -279,6 +285,7 @@ function handleDropdownSelection(e) {
     clearGalleryPhotograph();
     sortMediaByTitle();
     displayCardsPhotograph(myPagePhotographMedias);
+    handleLightbox();
   } else if (e.target.textContent === 'Popularité') {
     filterOption.forEach((options) => {
       options.classList.remove('selected');
@@ -291,6 +298,7 @@ function handleDropdownSelection(e) {
     clearGalleryPhotograph();
     sortMediaByLike();
     displayCardsPhotograph(myPagePhotographMedias);
+    handleLightbox();
   } else {
     return;
   }
@@ -308,23 +316,56 @@ function sortByDate() {
   myPagePhotographMedias.sort((a, b) => a.date.localeCompare(b.date));
 }
 
-function openLightbox() {
-  lightBox.style.display = 'block';
-}
-
-function closeLightBox() {
-  lightBox.style.display = 'none';
+function closeLightBox(e) {
+  e.preventDefault();
+  lightBox.style.visibility = 'hidden';
+  lightBox.style.opacity = '0';
+  document.body.classList.remove('modal-open-antiscroll');
+  lightBox.ariaHidden = 'true';
+  mainContent.ariaHidden = 'false';
+  mainContent.style.display = 'block';
 }
 
 // LightBox
 
 function handleLightbox() {
-  const cards = document.querySelectorAll('.card');
   const cardImg = document.querySelectorAll('.card-wrapper');
+  const btnLeft = document.querySelector('button.gauche');
+  const btnRight = document.querySelector('button.droit');
+  const cardMediaSrc = document.querySelectorAll('.gallerie-img');
+  const containerSlides = document.querySelector('.container-slides');
+  const titreImgLightbox = document.querySelector('.titre-lightbox');
+
+  const cards = document.querySelectorAll('.card');
+
+  cardMediaSrc.forEach((media, index) => {
+    mediaNames.push(media.getAttribute('data-name'));
+    mediaSrc.push(media.src);
+  });
 
   cards.forEach((card, index) => {
-    console.log(card, index);
     cardImg[index].addEventListener('click', openLightbox);
+
+    function openLightbox(e) {
+      e.preventDefault();
+      lightBox.style.visibility = 'visible';
+      lightBox.style.opacity = '1';
+      document.body.classList.add('modal-open-antiscroll');
+      lightBox.ariaHidden = 'false';
+      mainContent.ariaHidden = 'true';
+      mainContent.style.display = 'none';
+
+      containerSlides.innerHTML = '';
+
+      let innerMediaLightbox = cardMediaSrc[index].cloneNode();
+      let imgName = innerMediaLightbox.getAttribute('data-name');
+
+      let largeImg = innerMediaLightbox.src.replace('1_small', '2_medium');
+
+      containerSlides.appendChild(innerMediaLightbox);
+      innerMediaLightbox.src = largeImg;
+      titreImgLightbox.innerText = imgName;
+    }
   });
 }
 
@@ -332,7 +373,7 @@ handleLightbox();
 
 // Event Listeners
 
-closeLightboxBtn  .addEventListener('click', closeLightBox);
+closeLightboxBtn.addEventListener('click', closeLightBox);
 
 document.addEventListener('keydown', (evt) => {
   if (evt.key === 'Escape' && lightBox.style.display == 'block') {
