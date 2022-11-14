@@ -67,9 +67,11 @@ const myPagePhotograph = returnFilteredPhotograph();
 const myPagePhotographMedias = returnFilteredMedias();
 
 displayBannerPhotograph(myPagePhotograph);
-sortMediaByLike();
 displayCardsPhotograph(myPagePhotographMedias);
 displayTotalCounter(myPagePhotograph, myPagePhotographMedias);
+handleLightbox();
+
+const galleryMedias = document.querySelectorAll('.card');
 
 function displayBannerPhotograph(myPagePhotograph) {
   const photographBanner = document.querySelector('.banner-photographe');
@@ -105,6 +107,9 @@ function displayCardsPhotograph(myPagePhotographMedias) {
     );
     const card = document.createElement('article');
     card.className = 'card';
+    card.dataset.likes = media.likes;
+    card.dataset.title = media.title;
+    card.dataset.date = media.date;
 
     if (
       media.media.includes(
@@ -183,6 +188,7 @@ function displayCardsPhotograph(myPagePhotographMedias) {
     gallery.appendChild(card);
 
     likeMedia(index, media.likes);
+    sortMediaByLike();
   });
 }
 
@@ -270,10 +276,7 @@ function handleDropdownSelection(e) {
 
     filterChosen.textContent = e.target.textContent;
 
-    clearGalleryPhotograph();
     sortByDate();
-    displayCardsPhotograph(myPagePhotographMedias);
-    handleLightbox();
   } else if (e.target.textContent === 'Titre') {
     filterOption.forEach((options) => {
       options.classList.remove('selected');
@@ -282,10 +285,7 @@ function handleDropdownSelection(e) {
 
     filterChosen.textContent = e.target.textContent;
 
-    clearGalleryPhotograph();
     sortMediaByTitle();
-    displayCardsPhotograph(myPagePhotographMedias);
-    handleLightbox();
   } else if (e.target.textContent === 'Popularité') {
     filterOption.forEach((options) => {
       options.classList.remove('selected');
@@ -295,25 +295,39 @@ function handleDropdownSelection(e) {
 
     filterChosen.textContent = e.target.textContent;
 
-    clearGalleryPhotograph();
     sortMediaByLike();
-    displayCardsPhotograph(myPagePhotographMedias);
-    handleLightbox();
   } else {
     return;
   }
 }
 
 function sortMediaByLike() {
-  myPagePhotographMedias.sort((a, b) => b.likes - a.likes);
+  let elements = Array.from(gallery.children);
+  let sorted = elements.sort(function (a, b) {
+    return b.dataset.likes - a.dataset.likes;
+  });
+  clearGalleryPhotograph();
+  sorted.forEach((elm) => gallery.append(elm));
 }
 
 function sortMediaByTitle() {
-  myPagePhotographMedias.sort((a, b) => a.title.localeCompare(b.title));
+  let elements = Array.from(gallery.children);
+  let sorted = elements.sort((a, b) =>
+    a.dataset.title.localeCompare(b.dataset.title),
+  );
+  clearGalleryPhotograph();
+  sorted.forEach((elm) => gallery.append(elm));
 }
 
 function sortByDate() {
-  myPagePhotographMedias.sort((a, b) => a.date.localeCompare(b.date));
+  // myPagePhotographMedias.sort((a, b) => a.date.localeCompare(b.date));
+
+  let elements = Array.from(gallery.children);
+  let sorted = elements.sort((a, b) =>
+    a.dataset.date.localeCompare(b.dataset.date),
+  );
+  clearGalleryPhotograph();
+  sorted.forEach((elm) => gallery.append(elm));
 }
 
 function closeLightBox(e) {
@@ -335,13 +349,9 @@ function handleLightbox() {
   const cardMediaSrc = document.querySelectorAll('.gallerie-img');
   const containerSlides = document.querySelector('.container-slides');
   const titreImgLightbox = document.querySelector('.titre-lightbox');
+  let indexOfLightbox = undefined;
 
   const cards = document.querySelectorAll('.card');
-
-  cardMediaSrc.forEach((media, index) => {
-    mediaNames.push(media.getAttribute('data-name'));
-    mediaSrc.push(media.src);
-  });
 
   cards.forEach((card, index) => {
     cardImg[index].addEventListener('click', openLightbox);
@@ -365,11 +375,27 @@ function handleLightbox() {
       containerSlides.appendChild(innerMediaLightbox);
       innerMediaLightbox.src = largeImg;
       titreImgLightbox.innerText = imgName;
+
+      indexOfLightbox = index;
+
+      console.log(indexOfLightbox);
     }
   });
-}
 
-handleLightbox();
+  btnLeft.addEventListener('click', function () {
+    containerSlides.innerHTML = '';
+    let indexOfLightbox = undefined;
+    let innerMediaLightbox = cardMediaSrc[indexOfLightbox];
+    let imgName = innerMediaLightbox.getAttribute('data-name');
+    let largeImg = innerMediaLightbox.src.replace('1_small', '2_medium');
+
+    innerMediaLightbox.src = largeImg;
+    titreImgLightbox.innerText = imgName;
+    containerSlides.appendChild(innerMediaLightbox);
+
+    console.log(indexOfLightbox);
+  });
+}
 
 // Event Listeners
 
