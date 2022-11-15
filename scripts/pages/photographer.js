@@ -377,15 +377,12 @@ function handleLightbox() {
       titreImgLightbox.innerText = imgName;
 
       indexOfLightbox = index;
-
-      console.log(indexOfLightbox);
     }
   });
 
   btnLeft.addEventListener('click', function () {
     containerSlides.innerHTML = '';
-    let indexOfLightbox = undefined;
-    let innerMediaLightbox = cardMediaSrc[indexOfLightbox];
+    let innerMediaLightbox = cardMediaSrc[--indexOfLightbox].cloneNode();
     let imgName = innerMediaLightbox.getAttribute('data-name');
     let largeImg = innerMediaLightbox.src.replace('1_small', '2_medium');
 
