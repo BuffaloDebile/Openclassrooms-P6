@@ -69,7 +69,6 @@ const myPagePhotographMedias = returnFilteredMedias();
 displayBannerPhotograph(myPagePhotograph);
 displayCardsPhotograph(myPagePhotographMedias);
 displayTotalCounter(myPagePhotograph, myPagePhotographMedias);
-handleLightbox();
 
 const galleryMedias = document.querySelectorAll('.card');
 
@@ -79,7 +78,7 @@ function displayBannerPhotograph(myPagePhotograph) {
 
       <div class="banner-text-wrapper">
         <h1 class="title" lang="en">${myPagePhotograph.name}</h1>
-        <p class="location">${myPagePhotograph.city} ,${myPagePhotograph.country}</p>
+        <p class="location">${myPagePhotograph.city}, ${myPagePhotograph.country}</p>
         <p class="tagline">${myPagePhotograph.tagline}</p></div>
         <button class="banner-photographer-btn" type="button" aria-haspopup="dialog" aria-controls="dialog"
         aria-label="Contacter ${myPagePhotograph.name}">Contacter ${myPagePhotograph.name}</button>
@@ -331,7 +330,6 @@ function sortByDate() {
 }
 
 function closeLightBox(e) {
-  e.preventDefault();
   lightBox.style.visibility = 'hidden';
   lightBox.style.opacity = '0';
   document.body.classList.remove('modal-open-antiscroll');
@@ -342,64 +340,81 @@ function closeLightBox(e) {
 
 // LightBox
 
-function handleLightbox() {
-  const cardImg = document.querySelectorAll('.card-wrapper');
-  const btnLeft = document.querySelector('button.gauche');
-  const btnRight = document.querySelector('button.droit');
-  const cardMediaSrc = document.querySelectorAll('.gallerie-img');
-  const containerSlides = document.querySelector('.container-slides');
-  const titreImgLightbox = document.querySelector('.titre-lightbox');
-  let indexOfLightbox = undefined;
+const cardImg = document.querySelectorAll('.card-wrapper');
+const btnLeft = document.querySelector('button.gauche');
+const btnRight = document.querySelector('button.droit');
+const cardMediaSrc = document.querySelectorAll('.gallerie-img');
+const containerSlides = document.querySelector('.container-slides');
+const titreImgLightbox = document.querySelector('.titre-lightbox');
+let indexOfLightbox;
+const mediaLength = cardMediaSrc.length;
 
-  const cards = document.querySelectorAll('.card');
+const cards = document.querySelectorAll('.card');
 
-  cards.forEach((card, index) => {
-    cardImg[index].addEventListener('click', openLightbox);
+cards.forEach((card, index) => {
+  cardImg[index].addEventListener('click', openLightbox);
+  function openLightbox(e) {
+    e.preventDefault();
+    indexOfLightbox = index;
+    lightBox.style.visibility = 'visible';
+    lightBox.style.opacity = '1';
+    document.body.classList.add('modal-open-antiscroll');
+    lightBox.ariaHidden = 'false';
+    mainContent.ariaHidden = 'true';
+    mainContent.style.display = 'none';
 
-    function openLightbox(e) {
-      e.preventDefault();
-      lightBox.style.visibility = 'visible';
-      lightBox.style.opacity = '1';
-      document.body.classList.add('modal-open-antiscroll');
-      lightBox.ariaHidden = 'false';
-      mainContent.ariaHidden = 'true';
-      mainContent.style.display = 'none';
-
-      containerSlides.innerHTML = '';
-
-      let innerMediaLightbox = cardMediaSrc[index].cloneNode();
-      let imgName = innerMediaLightbox.getAttribute('data-name');
-
-      let largeImg = innerMediaLightbox.src.replace('1_small', '2_medium');
-
-      containerSlides.appendChild(innerMediaLightbox);
-      innerMediaLightbox.src = largeImg;
-      titreImgLightbox.innerText = imgName;
-
-      indexOfLightbox = index;
-    }
-  });
-
-  btnLeft.addEventListener('click', function () {
     containerSlides.innerHTML = '';
-    let innerMediaLightbox = cardMediaSrc[--indexOfLightbox].cloneNode();
+
+    let innerMediaLightbox = cardMediaSrc[index].cloneNode();
     let imgName = innerMediaLightbox.getAttribute('data-name');
+
     let largeImg = innerMediaLightbox.src.replace('1_small', '2_medium');
 
+    containerSlides.appendChild(innerMediaLightbox);
     innerMediaLightbox.src = largeImg;
     titreImgLightbox.innerText = imgName;
-    containerSlides.appendChild(innerMediaLightbox);
+  }
+});
 
-    console.log(indexOfLightbox);
-  });
-}
+btnLeft.addEventListener('click', function () {
+  if (indexOfLightbox <= 0) {
+    indexOfLightbox = mediaLength;
+  }
+
+  indexOfLightbox--;
+
+  containerSlides.innerHTML = '';
+  let innerMediaLightbox = cardMediaSrc[indexOfLightbox].cloneNode();
+  let imgName = innerMediaLightbox.getAttribute('data-name');
+  let largeImg = innerMediaLightbox.src.replace('1_small', '2_medium');
+
+  innerMediaLightbox.src = largeImg;
+  titreImgLightbox.innerText = imgName;
+  containerSlides.appendChild(innerMediaLightbox);
+});
+
+btnRight.addEventListener('click', function () {
+  indexOfLightbox++;
+
+  if (indexOfLightbox >= mediaLength) {
+    indexOfLightbox = 0;
+  }
+  containerSlides.innerHTML = '';
+  let innerMediaLightbox = cardMediaSrc[indexOfLightbox].cloneNode();
+  let imgName = innerMediaLightbox.getAttribute('data-name');
+  let largeImg = innerMediaLightbox.src.replace('1_small', '2_medium');
+
+  innerMediaLightbox.src = largeImg;
+  titreImgLightbox.innerText = imgName;
+  containerSlides.appendChild(innerMediaLightbox);
+});
 
 // Event Listeners
 
 closeLightboxBtn.addEventListener('click', closeLightBox);
 
 document.addEventListener('keydown', (evt) => {
-  if (evt.key === 'Escape' && lightBox.style.display == 'block') {
+  if (evt.key === 'Escape' && lightBox.style.visibility === 'visible') {
     closeLightBox();
   }
 });

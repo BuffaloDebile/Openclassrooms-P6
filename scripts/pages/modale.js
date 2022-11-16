@@ -161,3 +161,8 @@ window.onclick = (e) => {
     closeContactModal();
   }
 };
+
+// Prevent animation from playing on page load
+window.addEventListener('load', function () {
+  document.body.classList.remove('preload');
+});
