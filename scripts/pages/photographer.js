@@ -80,7 +80,7 @@ function displayBannerPhotograph(myPagePhotograph) {
         <h1 class="title" lang="en">${myPagePhotograph.name}</h1>
         <p class="location">${myPagePhotograph.city}, ${myPagePhotograph.country}</p>
         <p class="tagline">${myPagePhotograph.tagline}</p></div>
-        <button class="banner-photographer-btn" type="button" aria-haspopup="dialog" aria-controls="dialog"
+        <button class="banner-photographer-btn" type="button" aria-haspopup="dialog" aria-controls="contact"
         aria-label="Contacter ${myPagePhotograph.name}">Contacter ${myPagePhotograph.name}</button>
         <div class="banner-img"><img src="./sources/img/1_small/PhotographersID/${myPagePhotograph.portrait}" alt=" contacter ${myPagePhotograph.name}"></div>`;
 
@@ -136,8 +136,8 @@ function displayCardsPhotograph(myPagePhotographMedias) {
           <p class="like-counter" aria-label="Nombre de likes ${media.likes}">${
         media.likes
       }</p>
-          <button class="heart-link" aria-label="aimer cette photo" role="button">
-            <i class="heart-icon far fa-heart fa-2xl" aria-label="likes"></i>
+          <button class="heart-link" aria-label="aimer cette photo" role="button" aria-label="like">
+            <i class="heart-icon far fa-heart fa-2xl"></i>
           </button>
         </div>
       </div>`;
@@ -161,8 +161,8 @@ function displayCardsPhotograph(myPagePhotographMedias) {
         <p class="like-counter" aria-label="Nombre de likes ${media.likes}">${
         media.likes
       }</p>
-        <button class="heart-link" aria-label="aimer cette photo" role="button">
-          <i class="heart-icon far fa-heart fa-2xl" aria-label="likes"></i>
+        <button class="heart-link" aria-label="aimer cette photo" role="button" aria-label="like">
+          <i class="heart-icon far fa-heart fa-2xl" ></i>
         </button>
       </div>
     </div>`;
@@ -178,8 +178,8 @@ function displayCardsPhotograph(myPagePhotographMedias) {
         <p>Media error</p>
         <div class="heart-like">
           <p class="like-counter" aria-label="Nombre de likes : error</p>
-          <button class="heart-link" aria-label="aimer cette photo" role="button">
-            <i class="heart-icon far fa-heart fa-2xl" aria-label="likes"></i>
+          <button class="heart-link" aria-label="aimer cette photo" role="button" aria-label="like">
+            <i class="heart-icon far fa-heart fa-2xl" ></i>
           </button>
         </div>
       </div>`;
@@ -350,64 +350,67 @@ let indexOfLightbox;
 const mediaLength = cardMediaSrc.length;
 
 const cards = document.querySelectorAll('.card');
+handleSliderLightBox();
 
-cards.forEach((card, index) => {
-  cardImg[index].addEventListener('click', openLightbox);
-  function openLightbox(e) {
-    e.preventDefault();
-    indexOfLightbox = index;
-    lightBox.style.visibility = 'visible';
-    lightBox.style.opacity = '1';
-    document.body.classList.add('modal-open-antiscroll');
-    lightBox.ariaHidden = 'false';
-    mainContent.ariaHidden = 'true';
-    mainContent.style.display = 'none';
+function handleSliderLightBox() {
+  cards.forEach((card, index) => {
+    cardImg[index].addEventListener('click', openLightbox);
+    function openLightbox(e) {
+      e.preventDefault();
+      indexOfLightbox = index;
+      lightBox.style.visibility = 'visible';
+      lightBox.style.opacity = '1';
+      document.body.classList.add('modal-open-antiscroll');
+      lightBox.ariaHidden = 'false';
+      mainContent.ariaHidden = 'true';
+      mainContent.style.display = 'none';
+
+      containerSlides.innerHTML = '';
+
+      let innerMediaLightbox = cardMediaSrc[index].cloneNode();
+      let imgName = innerMediaLightbox.getAttribute('data-name');
+
+      let largeImg = innerMediaLightbox.src.replace('1_small', '2_medium');
+
+      containerSlides.appendChild(innerMediaLightbox);
+      innerMediaLightbox.src = largeImg;
+      titreImgLightbox.innerText = imgName;
+    }
+  });
+
+  btnLeft.addEventListener('click', function () {
+    if (indexOfLightbox <= 0) {
+      indexOfLightbox = mediaLength;
+    }
+
+    indexOfLightbox--;
 
     containerSlides.innerHTML = '';
-
-    let innerMediaLightbox = cardMediaSrc[index].cloneNode();
+    let innerMediaLightbox = cardMediaSrc[indexOfLightbox].cloneNode();
     let imgName = innerMediaLightbox.getAttribute('data-name');
-
     let largeImg = innerMediaLightbox.src.replace('1_small', '2_medium');
 
-    containerSlides.appendChild(innerMediaLightbox);
     innerMediaLightbox.src = largeImg;
     titreImgLightbox.innerText = imgName;
-  }
-});
+    containerSlides.appendChild(innerMediaLightbox);
+  });
 
-btnLeft.addEventListener('click', function () {
-  if (indexOfLightbox <= 0) {
-    indexOfLightbox = mediaLength;
-  }
+  btnRight.addEventListener('click', function () {
+    indexOfLightbox++;
 
-  indexOfLightbox--;
+    if (indexOfLightbox >= mediaLength) {
+      indexOfLightbox = 0;
+    }
+    containerSlides.innerHTML = '';
+    let innerMediaLightbox = cardMediaSrc[indexOfLightbox].cloneNode();
+    let imgName = innerMediaLightbox.getAttribute('data-name');
+    let largeImg = innerMediaLightbox.src.replace('1_small', '2_medium');
 
-  containerSlides.innerHTML = '';
-  let innerMediaLightbox = cardMediaSrc[indexOfLightbox].cloneNode();
-  let imgName = innerMediaLightbox.getAttribute('data-name');
-  let largeImg = innerMediaLightbox.src.replace('1_small', '2_medium');
-
-  innerMediaLightbox.src = largeImg;
-  titreImgLightbox.innerText = imgName;
-  containerSlides.appendChild(innerMediaLightbox);
-});
-
-btnRight.addEventListener('click', function () {
-  indexOfLightbox++;
-
-  if (indexOfLightbox >= mediaLength) {
-    indexOfLightbox = 0;
-  }
-  containerSlides.innerHTML = '';
-  let innerMediaLightbox = cardMediaSrc[indexOfLightbox].cloneNode();
-  let imgName = innerMediaLightbox.getAttribute('data-name');
-  let largeImg = innerMediaLightbox.src.replace('1_small', '2_medium');
-
-  innerMediaLightbox.src = largeImg;
-  titreImgLightbox.innerText = imgName;
-  containerSlides.appendChild(innerMediaLightbox);
-});
+    innerMediaLightbox.src = largeImg;
+    titreImgLightbox.innerText = imgName;
+    containerSlides.appendChild(innerMediaLightbox);
+  });
+}
 
 // Event Listeners
 
