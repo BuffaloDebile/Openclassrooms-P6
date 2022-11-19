@@ -1,16 +1,13 @@
-const closeContact = document.querySelector('.close-contact');
 const errorMsgContact = document.querySelectorAll('.message-erreur');
-const submitContact = document.querySelector('.submit-form');
-const formInputs = document.querySelectorAll('form.modal-form input');
-const formTextArea = document.querySelector('textarea.input-message');
 const modalWindow = document.getElementById('modal-window');
 const modal = document.querySelector('.modal');
 const mainContent = document.getElementById('main-photographe');
+const formInputs = document.querySelectorAll('form.modal-form input');
+const formTextArea = document.querySelector('textarea.input-message');
 const form = document.querySelector('form#contact');
 const modalTitle = document.querySelector('.modal-title');
 const thankYou = document.querySelector('.modal-thanks');
-
-const btnContact = document.querySelector('.banner-photographer-btn');
+const closeContact = document.querySelector('.close-contact');
 
 let isAnimating = false;
 
@@ -24,7 +21,9 @@ const inputsValidity = {
   message: false,
 };
 
-function closeContactModal() {
+export function closeContactModal() {
+  const form = document.querySelector('form#contact');
+
   modal.style.visibility = 'hidden';
   modalWindow.classList.remove('open');
   document.body.classList.remove('modal-open-antiscroll');
@@ -36,7 +35,18 @@ function closeContactModal() {
   resetForm();
 }
 
-function showValidation(errorMsgIndex, inputindex, isvalid) {
+export function openContactModal() {
+  modal.style.visibility = 'visible';
+  modalWindow.classList.add('open');
+  document.body.classList.add('modal-open-antiscroll');
+  modalWindow.ariaHidden = 'false';
+  mainContent.ariaHidden = 'true';
+  thankYou.style.display = 'none';
+  modalTitle.style.display = 'block';
+}
+
+export function showValidation(errorMsgIndex, inputindex, isvalid) {
+  const formInputs = document.querySelectorAll('form.modal-form input');
   if (isvalid) {
     errorMsgContact[errorMsgIndex].style.display = 'none';
     formInputs[inputindex].style.outline = 'none';
@@ -46,7 +56,8 @@ function showValidation(errorMsgIndex, inputindex, isvalid) {
   }
 }
 
-function nameValidation() {
+export function nameValidation() {
+  const formInputs = document.querySelectorAll('form.modal-form input');
   if (formInputs[0].value.length >= 3) {
     inputsValidity.name = true;
     showValidation(0, 0, true);
@@ -56,7 +67,8 @@ function nameValidation() {
   }
 }
 
-function lastnameValidation() {
+export function lastnameValidation() {
+  const formInputs = document.querySelectorAll('form.modal-form input');
   if (formInputs[1].value.length >= 3) {
     inputsValidity.lastName = true;
     showValidation(1, 1, true);
@@ -66,7 +78,8 @@ function lastnameValidation() {
   }
 }
 
-function emailValidation() {
+export function emailValidation() {
+  const formInputs = document.querySelectorAll('form.modal-form input');
   if (regexEmail.test(formInputs[2].value)) {
     inputsValidity.email = true;
     showValidation(2, 2, true);
@@ -76,7 +89,8 @@ function emailValidation() {
   }
 }
 
-function textareaValidation() {
+export function textareaValidation() {
+  const formTextArea = document.querySelector('textarea.input-message');
   if (formTextArea.value.length >= 10 && formTextArea.value.length <= 150) {
     errorMsgContact[3].style.display = 'none';
     formTextArea.style.outline = 'none';
@@ -87,7 +101,11 @@ function textareaValidation() {
   }
 }
 
-function resetForm() {
+export function resetForm() {
+  const form = document.querySelector('form#contact');
+  const formInputs = document.querySelectorAll('form.modal-form input');
+  const formTextArea = document.querySelector('textarea.input-message');
+
   form.reset();
   formInputs.forEach((input) => {
     input.value = '';
@@ -99,11 +117,14 @@ function resetForm() {
   inputsValidity.message = false;
 }
 
-function handleForm(e) {
+export function handleForm(e) {
   e.preventDefault();
 
-  const keys = Object.keys(inputsValidity);
+  const form = document.querySelector('form#contact');
+  const formInputs = document.querySelectorAll('form.modal-form input');
+  const formTextArea = document.querySelector('textarea.input-message');
 
+  const keys = Object.keys(inputsValidity);
   const failedInputs = keys.filter((key) => !inputsValidity[key]);
 
   console.log(failedInputs);
@@ -133,12 +154,9 @@ function handleForm(e) {
   }
 }
 
-closeContact.addEventListener('click', closeContactModal);
-
-document.addEventListener('keydown', (evt) => {
-  if (evt.key === 'Escape' && modal.style.visibility == 'visible') {
-    closeContactModal();
-  }
+// Prevent animation from playing on page load
+window.addEventListener('load', function () {
+  document.body.classList.remove('preload');
 });
 
 formInputs[0].addEventListener('blur', nameValidation);
@@ -155,14 +173,17 @@ formTextArea.addEventListener('input', textareaValidation);
 
 form.addEventListener('submit', handleForm);
 
+closeContact.addEventListener('click', closeContactModal);
+
+document.addEventListener('keydown', (evt) => {
+  if (evt.key === 'Escape' && modal.style.visibility == 'visible') {
+    closeContactModal();
+  }
+});
+
 // Close modal on click outside
 window.onclick = (e) => {
   if (e.target == modalWindow) {
     closeContactModal();
   }
 };
-
-// Prevent animation from playing on page load
-window.addEventListener('load', function () {
-  document.body.classList.remove('preload');
-});

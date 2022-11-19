@@ -3,15 +3,6 @@ body {
   margin: 0;
 }
 
-*:focus-visible,
-*:focus,
-img:focus-visible,
-a:focus-visible,
-button:focus-visible,
-article:focus-visible {
-  outline: 5px solid #ee38ee !important;
-}
-
 .preload * {
   -webkit-transition: none !important;
   -moz-transition: none !important;
