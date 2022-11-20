@@ -71,7 +71,7 @@ export function handleSliderLightBox() {
       indexOfLightbox = mediaLength;
     }
 
-    indexOfLightbox -= 1;
+    indexOfLightbox--;
 
     containerSlides.innerHTML = '';
     let innerMediaLightbox = cardMediaSrc[indexOfLightbox].cloneNode();
@@ -85,7 +85,7 @@ export function handleSliderLightBox() {
   }
 
   function lightboxRight() {
-    indexOfLightbox += 1;
+    indexOfLightbox++;
 
     if (indexOfLightbox >= mediaLength) {
       indexOfLightbox = 0;
