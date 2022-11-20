@@ -176,14 +176,14 @@ form.addEventListener('submit', handleForm);
 closeContact.addEventListener('click', closeContactModal);
 
 document.addEventListener('keydown', (evt) => {
-  if (evt.key === 'Escape' && modal.style.visibility == 'visible') {
+  if (evt.key === 'Escape' && modal.style.visibility === 'visible') {
     closeContactModal();
   }
 });
 
 // Close modal on click outside
 window.onclick = (e) => {
-  if (e.target == modalWindow) {
+  if (e.target === modalWindow) {
     closeContactModal();
   }
 };

@@ -2,7 +2,7 @@ const lightBox = document.querySelector('.lightbox');
 const closeLightboxBtn = document.querySelector('button.fermer');
 let indexOfLightbox;
 
-export function closeLightBox(e) {
+export function closeLightBox() {
   const lightBox = document.querySelector('.lightbox');
   const mainContent = document.getElementById('main-photographe');
 
@@ -71,7 +71,7 @@ export function handleSliderLightBox() {
       indexOfLightbox = mediaLength;
     }
 
-    indexOfLightbox--;
+    indexOfLightbox -= 1;
 
     containerSlides.innerHTML = '';
     let innerMediaLightbox = cardMediaSrc[indexOfLightbox].cloneNode();
@@ -85,7 +85,7 @@ export function handleSliderLightBox() {
   }
 
   function lightboxRight() {
-    indexOfLightbox++;
+    indexOfLightbox += 1;
 
     if (indexOfLightbox >= mediaLength) {
       indexOfLightbox = 0;
@@ -111,9 +111,13 @@ export function handleSliderLightBox() {
         break;
       case 'ArrowRight':
         lightboxRight();
+        break;
+      default:
+      // do nothing
     }
   };
 }
+
 closeLightboxBtn.addEventListener('click', closeLightBox);
 
 document.addEventListener('keydown', (evt) => {

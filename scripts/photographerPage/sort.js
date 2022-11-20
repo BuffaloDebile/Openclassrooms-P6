@@ -27,7 +27,7 @@ export function handleDropdownSelection(e) {
   const filterChosen = document.querySelector('.chosen');
   const filterOption = document.querySelectorAll('.filter-option');
 
-  let clickedValue = e.target;
+  const clickedValue = e.target;
 
   if (e.target.textContent === 'Date') {
     filterOption.forEach((options) => {
@@ -62,43 +62,45 @@ export function handleDropdownSelection(e) {
     removeEventFromEachCard();
     sortMediaByLike();
     handleSliderLightBox();
-  } else {
-    return;
   }
 }
 
 export function sortMediaByLike() {
-  let elements = Array.from(gallery.children);
-  let sorted = elements.sort(function (a, b) {
-    return b.dataset.likes - a.dataset.likes;
-  });
+  const elements = Array.from(gallery.children);
+  const sorted = elements.sort((a, b) => b.dataset.likes - a.dataset.likes);
   clearGalleryPhotograph();
   sorted.forEach((elm) => gallery.append(elm));
-  sorted.forEach((elm, index) => (elm.dataset.index = index));
+  sorted.forEach((elm, index) => {
+    elm.dataset.index = index;
+  });
   attachEventToEachCard();
 }
 
 export function sortMediaByTitle() {
   console.log();
-  let elements = Array.from(gallery.children);
-  let sorted = elements.sort((a, b) =>
+  const elements = Array.from(gallery.children);
+  const sorted = elements.sort((a, b) =>
     a.dataset.title.localeCompare(b.dataset.title),
   );
   clearGalleryPhotograph();
   sorted.forEach((elm) => gallery.append(elm));
-  sorted.forEach((elm, index) => (elm.dataset.index = index));
+  sorted.forEach((elm, index) => {
+    elm.dataset.index = index;
+  });
   attachEventToEachCard();
 }
 
 export function sortByDate() {
   // myPagePhotographMedias.sort((a, b) => a.date.localeCompare(b.date));
 
-  let elements = Array.from(gallery.children);
-  let sorted = elements.sort((a, b) =>
+  const elements = Array.from(gallery.children);
+  const sorted = elements.sort((a, b) =>
     a.dataset.date.localeCompare(b.dataset.date),
   );
   clearGalleryPhotograph();
   sorted.forEach((elm) => gallery.append(elm));
-  sorted.forEach((elm, index) => (elm.dataset.index = index));
+  sorted.forEach((elm, index) => {
+    elm.dataset.index = index;
+  });
   attachEventToEachCard();
 }

@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   const linkToData = '././data/photographers.json';
   const photographerContainer = document.querySelector(
-    '.photographer-container',
+    '.photographer-container'
   );
 
   let dataArray;

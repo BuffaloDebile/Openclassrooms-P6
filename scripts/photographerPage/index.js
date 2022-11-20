@@ -24,7 +24,9 @@ async function fetchData() {
 
 fetchData();
 
-dataArray = await fetchData();
+
+  dataArray = await fetchData();
+
 
 const myPagePhotograph = returnFilteredPhotograph();
 const myPagePhotographMedias = returnFilteredMedias();
