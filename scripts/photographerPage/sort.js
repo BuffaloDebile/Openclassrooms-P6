@@ -1,5 +1,11 @@
 export const gallery = document.querySelector('.grid-gallerie');
 
+import {
+  removeEventFromEachCard,
+  attachEventToEachCard,
+  handleSliderLightBox,
+} from './lightbox.js';
+
 export function clearGalleryPhotograph() {
   gallery.replaceChildren();
 }
@@ -32,7 +38,9 @@ export function handleDropdownSelection(e) {
 
     filterChosen.textContent = e.target.textContent;
 
+    removeEventFromEachCard();
     sortByDate();
+    handleSliderLightBox();
   } else if (e.target.textContent === 'Titre') {
     filterOption.forEach((options) => {
       options.classList.remove('selected');
@@ -40,8 +48,9 @@ export function handleDropdownSelection(e) {
     clickedValue.classList.add('selected');
 
     filterChosen.textContent = e.target.textContent;
-
+    removeEventFromEachCard();
     sortMediaByTitle();
+    handleSliderLightBox();
   } else if (e.target.textContent === 'Popularité') {
     filterOption.forEach((options) => {
       options.classList.remove('selected');
@@ -50,8 +59,9 @@ export function handleDropdownSelection(e) {
     clickedValue.classList.add('selected');
 
     filterChosen.textContent = e.target.textContent;
-
+    removeEventFromEachCard();
     sortMediaByLike();
+    handleSliderLightBox();
   } else {
     return;
   }
@@ -64,6 +74,8 @@ export function sortMediaByLike() {
   });
   clearGalleryPhotograph();
   sorted.forEach((elm) => gallery.append(elm));
+  sorted.forEach((elm, index) => (elm.dataset.index = index));
+  attachEventToEachCard();
 }
 
 export function sortMediaByTitle() {
@@ -74,6 +86,8 @@ export function sortMediaByTitle() {
   );
   clearGalleryPhotograph();
   sorted.forEach((elm) => gallery.append(elm));
+  sorted.forEach((elm, index) => (elm.dataset.index = index));
+  attachEventToEachCard();
 }
 
 export function sortByDate() {
@@ -85,4 +99,6 @@ export function sortByDate() {
   );
   clearGalleryPhotograph();
   sorted.forEach((elm) => gallery.append(elm));
+  sorted.forEach((elm, index) => (elm.dataset.index = index));
+  attachEventToEachCard();
 }

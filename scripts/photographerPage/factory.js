@@ -105,7 +105,9 @@ export function displayCardsPhotograph(myPagePhotographMedias) {
             media.photographerName
           }/${media.media || media.video}" alt="image de la gallerie : ${
         media.title
-      }" data-name="${media.title}" onerror="this.onerror=null; this.src='./sources/img/1_small/nomedia/nomedia.jpg'">
+      }" data-name="${
+        media.title
+      }" onerror="this.onerror=null; this.src='./sources/img/1_small/nomedia/nomedia.jpg'">
         </div>
       </a>
       <div class="card-footer">

@@ -1,5 +1,6 @@
 const lightBox = document.querySelector('.lightbox');
 const closeLightboxBtn = document.querySelector('button.fermer');
+let indexOfLightbox;
 
 export function closeLightBox(e) {
   const lightBox = document.querySelector('.lightbox');
@@ -13,46 +14,57 @@ export function closeLightBox(e) {
   mainContent.style.display = 'block';
 }
 
-export function handleSliderLightBox() {
-  let indexOfLightbox;
+export function attachEventToEachCard() {
   const galleryMedias = document.querySelectorAll('.card');
   const cardImg = document.querySelectorAll('.card-wrapper');
+  galleryMedias.forEach((card) => {
+    cardImg[card.dataset.index].addEventListener('click', openLightbox);
+  });
+}
+
+export function removeEventFromEachCard() {
+  const galleryMedias = document.querySelectorAll('.card');
+  const cardImg = document.querySelectorAll('.card-wrapper');
+  galleryMedias.forEach((card) => {
+    cardImg[card.dataset.index].removeEventListener('click', openLightbox);
+  });
+}
+
+function openLightbox(e) {
   const lightBox = document.querySelector('.lightbox');
   const mainContent = document.getElementById('main-photographe');
+  const containerSlides = document.querySelector('.container-slides');
+  const cardMediaSrc = document.querySelectorAll('.gallerie-img');
+  const titreImgLightbox = document.querySelector('.titre-lightbox');
+
+  e.preventDefault();
+  indexOfLightbox = this.parentElement.dataset.index;
+  lightBox.style.visibility = 'visible';
+  lightBox.style.opacity = '1';
+  document.body.classList.add('modal-open-antiscroll');
+  lightBox.ariaHidden = 'false';
+  mainContent.ariaHidden = 'true';
+  mainContent.style.display = 'none';
+
+  containerSlides.innerHTML = '';
+
+  let innerMediaLightbox = cardMediaSrc[indexOfLightbox].cloneNode();
+  let imgName = innerMediaLightbox.getAttribute('data-name');
+
+  let largeImg = innerMediaLightbox.src.replace('1_small', '2_medium');
+
+  containerSlides.appendChild(innerMediaLightbox);
+  innerMediaLightbox.src = largeImg;
+  titreImgLightbox.innerText = imgName;
+}
+
+export function handleSliderLightBox() {
   const cardMediaSrc = document.querySelectorAll('.gallerie-img');
   const btnLeft = document.querySelector('button.gauche');
   const btnRight = document.querySelector('button.droit');
-
   const containerSlides = document.querySelector('.container-slides');
   const titreImgLightbox = document.querySelector('.titre-lightbox');
   const mediaLength = cardMediaSrc.length;
-
-  galleryMedias.forEach((card, index) => {
-    cardImg[index].addEventListener('click', openLightbox);
-
-    function openLightbox(e) {
-      e.preventDefault();
-      indexOfLightbox = index;
-      console.log(indexOfLightbox);
-      lightBox.style.visibility = 'visible';
-      lightBox.style.opacity = '1';
-      document.body.classList.add('modal-open-antiscroll');
-      lightBox.ariaHidden = 'false';
-      mainContent.ariaHidden = 'true';
-      mainContent.style.display = 'none';
-
-      containerSlides.innerHTML = '';
-
-      let innerMediaLightbox = cardMediaSrc[index].cloneNode();
-      let imgName = innerMediaLightbox.getAttribute('data-name');
-
-      let largeImg = innerMediaLightbox.src.replace('1_small', '2_medium');
-
-      containerSlides.appendChild(innerMediaLightbox);
-      innerMediaLightbox.src = largeImg;
-      titreImgLightbox.innerText = imgName;
-    }
-  });
 
   function lightboxLeft() {
     if (indexOfLightbox <= 0) {
