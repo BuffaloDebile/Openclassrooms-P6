@@ -74,6 +74,7 @@ export function handleSliderLightBox() {
     indexOfLightbox--;
 
     containerSlides.innerHTML = '';
+    console.log(indexOfLightbox);
     let innerMediaLightbox = cardMediaSrc[indexOfLightbox].cloneNode();
     let imgName = innerMediaLightbox.getAttribute('data-name');
     let largeImg = innerMediaLightbox.src.replace('1_small', '2_medium');
@@ -81,7 +82,6 @@ export function handleSliderLightBox() {
     innerMediaLightbox.src = largeImg;
     titreImgLightbox.innerText = imgName;
     containerSlides.appendChild(innerMediaLightbox);
-    console.log(indexOfLightbox);
   }
 
   function lightboxRight() {
@@ -90,6 +90,8 @@ export function handleSliderLightBox() {
     if (indexOfLightbox >= mediaLength) {
       indexOfLightbox = 0;
     }
+
+    console.log(indexOfLightbox);
     containerSlides.innerHTML = '';
     let innerMediaLightbox = cardMediaSrc[indexOfLightbox].cloneNode();
     let imgName = innerMediaLightbox.getAttribute('data-name');
@@ -98,7 +100,6 @@ export function handleSliderLightBox() {
     innerMediaLightbox.src = largeImg;
     titreImgLightbox.innerText = imgName;
     containerSlides.appendChild(innerMediaLightbox);
-    console.log(indexOfLightbox);
   }
 
   btnLeft.addEventListener('click', lightboxLeft);

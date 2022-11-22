@@ -22,11 +22,7 @@ async function fetchData() {
   }
 }
 
-fetchData();
-
-
-  dataArray = await fetchData();
-
+dataArray = await Promise.resolve(fetchData());
 
 const myPagePhotograph = returnFilteredPhotograph();
 const myPagePhotographMedias = returnFilteredMedias();

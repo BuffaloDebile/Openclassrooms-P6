@@ -37,9 +37,7 @@ async function fetchData() {
   }
 }
 
-fetchData();
-
-dataArray = await fetchData();
+dataArray = await Promise.resolve(fetchData());
 
 function returnFilteredPhotograph() {
   const filter = dataArray.photographers.filter(
