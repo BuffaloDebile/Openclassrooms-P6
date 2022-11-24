@@ -106,15 +106,17 @@ export function handleSliderLightBox() {
   btnRight.addEventListener('click', lightboxRight);
 
   document.onkeydown = function (e) {
-    switch (e.key) {
-      case 'ArrowLeft':
-        lightboxLeft();
-        break;
-      case 'ArrowRight':
-        lightboxRight();
-        break;
-      default:
-      // do nothing
+    if (lightBox.style.visibility === 'visible') {
+      switch (e.key) {
+        case 'ArrowLeft':
+          lightboxLeft();
+          break;
+        case 'ArrowRight':
+          lightboxRight();
+          break;
+        default:
+        // do nothing
+      }
     }
   };
 }
