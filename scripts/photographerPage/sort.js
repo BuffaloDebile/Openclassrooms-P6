@@ -91,8 +91,6 @@ export function sortMediaByTitle() {
 }
 
 export function sortByDate() {
-  // myPagePhotographMedias.sort((a, b) => a.date.localeCompare(b.date));
-
   const elements = Array.from(gallery.children);
   const sorted = elements.sort((a, b) =>
     a.dataset.date.localeCompare(b.dataset.date),

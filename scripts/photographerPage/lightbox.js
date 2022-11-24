@@ -38,7 +38,7 @@ function openLightbox(e) {
   const titreImgLightbox = document.querySelector('.titre-lightbox');
 
   e.preventDefault();
-  indexOfLightbox = this.parentElement.dataset.index;
+  indexOfLightbox = Number(this.parentElement.dataset.index);
   lightBox.style.visibility = 'visible';
   lightBox.style.opacity = '1';
   document.body.classList.add('modal-open-antiscroll');
@@ -56,6 +56,8 @@ function openLightbox(e) {
   containerSlides.appendChild(innerMediaLightbox);
   innerMediaLightbox.src = largeImg;
   titreImgLightbox.innerText = imgName;
+
+  console.log(indexOfLightbox);
 }
 
 export function handleSliderLightBox() {
@@ -64,42 +66,61 @@ export function handleSliderLightBox() {
   const btnRight = document.querySelector('button.droit');
   const containerSlides = document.querySelector('.container-slides');
   const titreImgLightbox = document.querySelector('.titre-lightbox');
-  const mediaLength = cardMediaSrc.length;
+  const mediaLength = cardMediaSrc.length - 1;
 
   function lightboxLeft() {
-    if (indexOfLightbox <= 0) {
+    indexOfLightbox -= 1;
+
+    if (indexOfLightbox < 0) {
       indexOfLightbox = mediaLength;
+
+      containerSlides.innerHTML = '';
+      console.log(indexOfLightbox);
+      let innerMediaLightbox = cardMediaSrc[indexOfLightbox].cloneNode();
+      let imgName = innerMediaLightbox.getAttribute('data-name');
+      let largeImg = innerMediaLightbox.src.replace('1_small', '2_medium');
+
+      innerMediaLightbox.src = largeImg;
+      titreImgLightbox.innerText = imgName;
+      containerSlides.appendChild(innerMediaLightbox);
+    } else {
+      containerSlides.innerHTML = '';
+      console.log(indexOfLightbox);
+      let innerMediaLightbox = cardMediaSrc[indexOfLightbox].cloneNode();
+      let imgName = innerMediaLightbox.getAttribute('data-name');
+      let largeImg = innerMediaLightbox.src.replace('1_small', '2_medium');
+
+      innerMediaLightbox.src = largeImg;
+      titreImgLightbox.innerText = imgName;
+      containerSlides.appendChild(innerMediaLightbox);
     }
-
-    indexOfLightbox--;
-
-    containerSlides.innerHTML = '';
-    console.log(indexOfLightbox);
-    let innerMediaLightbox = cardMediaSrc[indexOfLightbox].cloneNode();
-    let imgName = innerMediaLightbox.getAttribute('data-name');
-    let largeImg = innerMediaLightbox.src.replace('1_small', '2_medium');
-
-    innerMediaLightbox.src = largeImg;
-    titreImgLightbox.innerText = imgName;
-    containerSlides.appendChild(innerMediaLightbox);
   }
 
   function lightboxRight() {
-    indexOfLightbox++;
+    indexOfLightbox += 1;
 
-    if (indexOfLightbox >= mediaLength) {
+    if (indexOfLightbox > mediaLength) {
       indexOfLightbox = 0;
+      console.log(indexOfLightbox);
+      containerSlides.innerHTML = '';
+      let innerMediaLightbox = cardMediaSrc[indexOfLightbox].cloneNode();
+      let imgName = innerMediaLightbox.getAttribute('data-name');
+      let largeImg = innerMediaLightbox.src.replace('1_small', '2_medium');
+
+      innerMediaLightbox.src = largeImg;
+      titreImgLightbox.innerText = imgName;
+      containerSlides.appendChild(innerMediaLightbox);
+    } else {
+      console.log(indexOfLightbox);
+      containerSlides.innerHTML = '';
+      let innerMediaLightbox = cardMediaSrc[indexOfLightbox].cloneNode();
+      let imgName = innerMediaLightbox.getAttribute('data-name');
+      let largeImg = innerMediaLightbox.src.replace('1_small', '2_medium');
+
+      innerMediaLightbox.src = largeImg;
+      titreImgLightbox.innerText = imgName;
+      containerSlides.appendChild(innerMediaLightbox);
     }
-
-    console.log(indexOfLightbox);
-    containerSlides.innerHTML = '';
-    let innerMediaLightbox = cardMediaSrc[indexOfLightbox].cloneNode();
-    let imgName = innerMediaLightbox.getAttribute('data-name');
-    let largeImg = innerMediaLightbox.src.replace('1_small', '2_medium');
-
-    innerMediaLightbox.src = largeImg;
-    titreImgLightbox.innerText = imgName;
-    containerSlides.appendChild(innerMediaLightbox);
   }
 
   btnLeft.addEventListener('click', lightboxLeft);
