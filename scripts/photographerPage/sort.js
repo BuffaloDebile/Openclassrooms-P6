@@ -6,7 +6,7 @@ import {
   handleSliderLightBox,
 } from './lightbox.js';
 
-export function clearGalleryPhotograph() {
+function clearGalleryPhotograph() {
   gallery.replaceChildren();
 }
 
@@ -40,6 +40,7 @@ export function handleDropdownSelection(e) {
 
     removeEventFromEachCard();
     sortByDate();
+    attachEventToEachCard();
     handleSliderLightBox();
   } else if (e.target.textContent === 'Titre') {
     filterOption.forEach((options) => {
@@ -50,6 +51,7 @@ export function handleDropdownSelection(e) {
     filterChosen.textContent = e.target.textContent;
     removeEventFromEachCard();
     sortMediaByTitle();
+    attachEventToEachCard();
     handleSliderLightBox();
   } else if (e.target.textContent === 'Popularité') {
     filterOption.forEach((options) => {
@@ -61,6 +63,7 @@ export function handleDropdownSelection(e) {
     filterChosen.textContent = e.target.textContent;
     removeEventFromEachCard();
     sortMediaByLike();
+    attachEventToEachCard();
     handleSliderLightBox();
   }
 }
@@ -73,11 +76,9 @@ export function sortMediaByLike() {
   sorted.forEach((elm, index) => {
     elm.dataset.index = index;
   });
-  attachEventToEachCard();
 }
 
 export function sortMediaByTitle() {
-  console.log();
   const elements = Array.from(gallery.children);
   const sorted = elements.sort((a, b) =>
     a.dataset.title.localeCompare(b.dataset.title),
@@ -87,7 +88,6 @@ export function sortMediaByTitle() {
   sorted.forEach((elm, index) => {
     elm.dataset.index = index;
   });
-  attachEventToEachCard();
 }
 
 export function sortByDate() {
@@ -100,5 +100,4 @@ export function sortByDate() {
   sorted.forEach((elm, index) => {
     elm.dataset.index = index;
   });
-  attachEventToEachCard();
 }

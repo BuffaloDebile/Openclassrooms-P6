@@ -35,7 +35,7 @@ import { openSortFilter, handleDropdownSelection } from './sort.js';
 
 import { displayTotalCounter } from './like.js';
 
-import { handleSliderLightBox } from './lightbox.js';
+import { attachEventToEachCard, handleSliderLightBox } from './lightbox.js';
 
 // CALLING FUNCTIONS
 
@@ -43,6 +43,7 @@ displayBannerPhotograph(myPagePhotograph);
 displayCardsPhotograph(myPagePhotographMedias);
 displayTotalCounter(myPagePhotograph, myPagePhotographMedias);
 handleSliderLightBox();
+attachEventToEachCard();
 
 // FUNCTIONS
 

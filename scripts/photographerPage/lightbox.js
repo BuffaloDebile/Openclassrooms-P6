@@ -5,6 +5,7 @@ let indexOfLightbox;
 export function closeLightBox() {
   const lightBox = document.querySelector('.lightbox');
   const mainContent = document.getElementById('main-photographe');
+  const containerSlides = document.querySelector('.container-slides');
 
   lightBox.style.visibility = 'hidden';
   lightBox.style.opacity = '0';
@@ -12,6 +13,7 @@ export function closeLightBox() {
   lightBox.ariaHidden = 'true';
   mainContent.ariaHidden = 'false';
   mainContent.style.display = 'block';
+  containerSlides.innerHTML = '';
 }
 
 export function attachEventToEachCard() {
