@@ -39,4 +39,4 @@ It includes fields for names, email address and message. display the contents of
 <br><br>
 
 <p>Project started on : 21/10/2022</p>
-<p>Project Completed on : xx/xx/2022 </p>
+<p>Project Completed on : 21/11/2022 </p>
