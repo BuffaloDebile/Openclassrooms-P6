@@ -5,6 +5,8 @@ const lightBox = document.querySelector('.lightbox');
 const closeLightboxBtn = document.querySelector('button.fermer');
 let indexOfLightbox;
 
+let focusedElementBeforeModal;
+
 export function closeLightBox() {
   const lightBox = document.querySelector('.lightbox');
   const mainContent = document.getElementById('main-photographe');
@@ -17,6 +19,8 @@ export function closeLightBox() {
   mainContent.ariaHidden = 'false';
   mainContent.style.display = 'block';
   containerSlides.innerHTML = '';
+
+  focusedElementBeforeModal.focus();
 }
 
 export function attachEventToEachCard() {
@@ -41,6 +45,8 @@ function openLightbox(e) {
   const containerSlides = document.querySelector('.container-slides');
   const cardMediaSrc = document.querySelectorAll('.gallerie-img');
   const titreImgLightbox = document.querySelector('.titre-lightbox');
+
+  focusedElementBeforeModal = document.activeElement;
 
   e.preventDefault();
   indexOfLightbox = Number(this.parentElement.dataset.index);
