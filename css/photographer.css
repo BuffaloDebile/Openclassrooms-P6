@@ -240,12 +240,11 @@ span.chosen {
 }
 
 section.grid-gallerie {
-  max-width: 1200px;
+  max-width: 1230px;
   margin: 40px auto;
-  padding: 10px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  column-gap: 2.8%;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  column-gap: 4%;
 
   animation-name: fade-in;
   -webkit-animation-name: fade-in;
@@ -277,16 +276,22 @@ div.img-wrapper > * {
 
 article.card {
   width: 100%;
-  margin: 1.5rem auto;
+  margin: 3.5rem auto;
   height: auto;
   display: inline-block;
+  width: 35rem;
+  height: 30rem;
+  max-height: 30rem;
+  max-width: 35rem;
 }
 
 div.img-wrapper {
   overflow: hidden;
   border-radius: 0.6rem;
-  height: 22rem;
-  max-height: 22rem;
+  width: 35rem;
+  height: 30rem;
+  max-height: 30rem;
+  max-width: 35rem;
 }
 
 div.img-wrapper video {

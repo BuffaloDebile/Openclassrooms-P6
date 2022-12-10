@@ -33,6 +33,8 @@
   margin: auto;
   height: 85%;
   width: 70%;
+  max-width: 1050px;
+  max-height: 900px;
   position: absolute;
   border-radius: 0.6rem;
   background-color: #868686;
@@ -81,19 +83,28 @@ button.droit {
 
 button.fermer {
   top: 2%;
-  right: 3%;
+  right: 5%;
   width: auto;
   height: 80px;
+}
+
+button.fermer em {
+  font-size: 8rem;
+}
+
+button.droit em,
+button.gauche em {
+  font-size: 9rem;
 }
 
 h2.titre-lightbox {
   color: var(--color-primary-red);
   position: absolute;
-  margin-right: 10%;
-  bottom: 2%;
-  left: 15%;
-  margin: auto;
-  font-size: 1.5rem;
+  bottom: -10px;
+  left: 50%;
+  max-width: 1040px;
+  width: 70%;
+  transform: translate(-50%, -50%);
+  font-size: 2.5rem;
   font-weight: 500;
 }
-
