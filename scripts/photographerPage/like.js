@@ -1,8 +1,9 @@
-export function likeMedia(index, media) {
+/* eslint-disable semi */
+export function likeMedia (index, media) {
   const likeBtn = document.querySelectorAll('.heart-link');
   const likeIcon = document.querySelectorAll('i.heart-icon');
   const likeCount = document.querySelectorAll('.like-counter');
-  let totalLike = document.querySelector('.total-like span');
+  const totalLike = document.querySelector('.total-like span');
   likeBtn[index].addEventListener('click', () => {
     if (likeIcon[index].classList.contains('far')) {
       likeIcon[index].classList.remove('far');
@@ -20,8 +21,8 @@ export function likeMedia(index, media) {
   });
 }
 
-export function displayTotalCounter(myPagePhotograph, myPagePhotographMedias) {
-  let totalLike = document.querySelector('.total-like span');
+export function displayTotalCounter (myPagePhotograph, myPagePhotographMedias) {
+  const totalLike = document.querySelector('.total-like span');
   const price = document.querySelector('.price');
 
   price.innerText = `${myPagePhotograph.price}€/ jour`;
@@ -29,9 +30,9 @@ export function displayTotalCounter(myPagePhotograph, myPagePhotographMedias) {
   totalLike.innerText = getTotalLikes(myPagePhotographMedias);
 }
 
-export function getTotalLikes(myPagePhotographMedias) {
+export function getTotalLikes (myPagePhotographMedias) {
   let TotalPhotographerLikes = [];
-  let allLikes = [];
+  const allLikes = [];
 
   myPagePhotographMedias.forEach((media) => {
     allLikes.push(media.likes);
@@ -39,7 +40,7 @@ export function getTotalLikes(myPagePhotographMedias) {
 
   TotalPhotographerLikes = allLikes.reduce(
     (sum, currentLikes) => sum + currentLikes,
-    0,
+    0
   );
 
   return TotalPhotographerLikes;

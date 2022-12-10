@@ -1,3 +1,6 @@
+/* eslint-disable comma-dangle */
+/* eslint-disable space-before-function-paren */
+/* eslint-disable semi */
 const lightBox = document.querySelector('.lightbox');
 const closeLightboxBtn = document.querySelector('button.fermer');
 let indexOfLightbox;
@@ -50,10 +53,10 @@ function openLightbox(e) {
 
   containerSlides.innerHTML = '';
 
-  let innerMediaLightbox = cardMediaSrc[indexOfLightbox].cloneNode();
-  let imgName = innerMediaLightbox.getAttribute('data-name');
+  const innerMediaLightbox = cardMediaSrc[indexOfLightbox].cloneNode();
+  const imgName = innerMediaLightbox.getAttribute('data-name');
 
-  let largeImg = innerMediaLightbox.src.replace('1_small', '2_medium');
+  const largeImg = innerMediaLightbox.src.replace('1_small', '2_medium');
 
   containerSlides.appendChild(innerMediaLightbox);
   innerMediaLightbox.src = largeImg;
@@ -76,9 +79,9 @@ export function handleSliderLightBox() {
 
       containerSlides.innerHTML = '';
 
-      let innerMediaLightbox = cardMediaSrc[indexOfLightbox].cloneNode();
-      let imgName = innerMediaLightbox.getAttribute('data-name');
-      let largeImg = innerMediaLightbox.src.replace('1_small', '2_medium');
+      const innerMediaLightbox = cardMediaSrc[indexOfLightbox].cloneNode();
+      const imgName = innerMediaLightbox.getAttribute('data-name');
+      const largeImg = innerMediaLightbox.src.replace('1_small', '2_medium');
 
       innerMediaLightbox.src = largeImg;
       titreImgLightbox.innerText = imgName;
@@ -86,9 +89,9 @@ export function handleSliderLightBox() {
     } else {
       containerSlides.innerHTML = '';
 
-      let innerMediaLightbox = cardMediaSrc[indexOfLightbox].cloneNode();
-      let imgName = innerMediaLightbox.getAttribute('data-name');
-      let largeImg = innerMediaLightbox.src.replace('1_small', '2_medium');
+      const innerMediaLightbox = cardMediaSrc[indexOfLightbox].cloneNode();
+      const imgName = innerMediaLightbox.getAttribute('data-name');
+      const largeImg = innerMediaLightbox.src.replace('1_small', '2_medium');
 
       innerMediaLightbox.src = largeImg;
       titreImgLightbox.innerText = imgName;
@@ -103,18 +106,18 @@ export function handleSliderLightBox() {
       indexOfLightbox = 0;
 
       containerSlides.innerHTML = '';
-      let innerMediaLightbox = cardMediaSrc[indexOfLightbox].cloneNode();
-      let imgName = innerMediaLightbox.getAttribute('data-name');
-      let largeImg = innerMediaLightbox.src.replace('1_small', '2_medium');
+      const innerMediaLightbox = cardMediaSrc[indexOfLightbox].cloneNode();
+      const imgName = innerMediaLightbox.getAttribute('data-name');
+      const largeImg = innerMediaLightbox.src.replace('1_small', '2_medium');
 
       innerMediaLightbox.src = largeImg;
       titreImgLightbox.innerText = imgName;
       containerSlides.appendChild(innerMediaLightbox);
     } else {
       containerSlides.innerHTML = '';
-      let innerMediaLightbox = cardMediaSrc[indexOfLightbox].cloneNode();
-      let imgName = innerMediaLightbox.getAttribute('data-name');
-      let largeImg = innerMediaLightbox.src.replace('1_small', '2_medium');
+      const innerMediaLightbox = cardMediaSrc[indexOfLightbox].cloneNode();
+      const imgName = innerMediaLightbox.getAttribute('data-name');
+      const largeImg = innerMediaLightbox.src.replace('1_small', '2_medium');
 
       innerMediaLightbox.src = largeImg;
       titreImgLightbox.innerText = imgName;

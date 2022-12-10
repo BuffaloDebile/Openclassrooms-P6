@@ -1,16 +1,17 @@
-export const gallery = document.querySelector('.grid-gallerie');
-
+/* eslint-disable semi */
 import {
   removeEventFromEachCard,
   attachEventToEachCard,
-  handleSliderLightBox,
+  handleSliderLightBox
 } from './lightbox.js';
 
-function clearGalleryPhotograph() {
+export const gallery = document.querySelector('.grid-gallerie');
+
+function clearGalleryPhotograph () {
   gallery.replaceChildren();
 }
 
-export function openSortFilter(e) {
+export function openSortFilter (e) {
   const filterSelectTop = document.querySelector('.filter-select-top');
   const filterSelect = document.querySelector('.filter-select');
 
@@ -22,7 +23,7 @@ export function openSortFilter(e) {
     : (filterSelectTop.ariaExpanded = false);
 }
 
-export function handleDropdownSelection(e) {
+export function handleDropdownSelection (e) {
   e.preventDefault();
   const filterChosen = document.querySelector('.chosen');
   const filterOption = document.querySelectorAll('.filter-option');
@@ -68,7 +69,7 @@ export function handleDropdownSelection(e) {
   }
 }
 
-export function sortMediaByLike() {
+export function sortMediaByLike () {
   const elements = Array.from(gallery.children);
   const sorted = elements.sort((a, b) => b.dataset.likes - a.dataset.likes);
   clearGalleryPhotograph();
@@ -78,10 +79,10 @@ export function sortMediaByLike() {
   });
 }
 
-export function sortMediaByTitle() {
+export function sortMediaByTitle () {
   const elements = Array.from(gallery.children);
   const sorted = elements.sort((a, b) =>
-    a.dataset.title.localeCompare(b.dataset.title),
+    a.dataset.title.localeCompare(b.dataset.title)
   );
   clearGalleryPhotograph();
   sorted.forEach((elm) => gallery.append(elm));
@@ -90,10 +91,10 @@ export function sortMediaByTitle() {
   });
 }
 
-export function sortByDate() {
+export function sortByDate () {
   const elements = Array.from(gallery.children);
   const sorted = elements.sort((a, b) =>
-    a.dataset.date.localeCompare(b.dataset.date),
+    a.dataset.date.localeCompare(b.dataset.date)
   );
   clearGalleryPhotograph();
   sorted.forEach((elm) => gallery.append(elm));

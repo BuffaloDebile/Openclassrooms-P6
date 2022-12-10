@@ -1,31 +1,6 @@
+/* eslint-disable eqeqeq */
+/* eslint-disable semi */
 // VARIABLES
-
-let photographerID = new URLSearchParams(document.location.search).get('id');
-const linkToData = '././data/photographers.json';
-let dataArray;
-const filterSelect = document.querySelector('.filter-select');
-const filterOption = document.querySelectorAll('.filter-option');
-
-// FETCHING DATA
-
-async function fetchData() {
-  try {
-    const response = await fetch(linkToData);
-
-    const results = await response.json();
-
-    dataArray = results;
-
-    return dataArray;
-  } catch (error) {
-    console.log(`Une erreur est survenu ! `);
-  }
-}
-
-dataArray = await Promise.resolve(fetchData());
-
-const myPagePhotograph = returnFilteredPhotograph();
-const myPagePhotographMedias = returnFilteredMedias();
 
 // JS MODULES
 
@@ -37,6 +12,33 @@ import { displayTotalCounter } from './like.js';
 
 import { attachEventToEachCard, handleSliderLightBox } from './lightbox.js';
 
+const photographerID = new URLSearchParams(document.location.search).get('id');
+const linkToData = '././data/photographers.json';
+let dataArray;
+const filterSelect = document.querySelector('.filter-select');
+const filterOption = document.querySelectorAll('.filter-option');
+
+// FETCHING DATA
+
+async function fetchData () {
+  try {
+    const response = await fetch(linkToData);
+
+    const results = await response.json();
+
+    dataArray = results;
+
+    return dataArray;
+  } catch (error) {
+    console.log('Une erreur est survenu ! ');
+  }
+}
+
+dataArray = await Promise.resolve(fetchData());
+
+const myPagePhotograph = returnFilteredPhotograph();
+const myPagePhotographMedias = returnFilteredMedias();
+
 // CALLING FUNCTIONS
 
 displayBannerPhotograph(myPagePhotograph);
@@ -47,16 +49,16 @@ attachEventToEachCard();
 
 // FUNCTIONS
 
-function returnFilteredPhotograph() {
+function returnFilteredPhotograph () {
   const filter = dataArray.photographers.filter(
-    (photographers) => photographers.id == photographerID,
+    (photographers) => photographers.id == photographerID
   );
   return filter[0];
 }
 
-function returnFilteredMedias() {
+function returnFilteredMedias () {
   const filter = dataArray.media.filter(
-    (media) => media.photographerId == photographerID,
+    (media) => media.photographerId == photographerID
   );
   return filter;
 }

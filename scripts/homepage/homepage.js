@@ -1,12 +1,13 @@
+/* eslint-disable semi */
 document.addEventListener('DOMContentLoaded', () => {
   const linkToData = '././data/photographers.json';
   const photographerContainer = document.querySelector(
-    '.photographer-container',
+    '.photographer-container'
   );
 
   let dataArray;
 
-  async function fetchPhotographers() {
+  async function fetchPhotographers () {
     try {
       const response = await fetch(linkToData);
 
@@ -16,12 +17,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
       createNewPhotographerCard(dataArray.photographers);
     } catch (error) {
-      console.log(`Une erreur est survenu ! `);
+      console.log('Une erreur est survenu ! ');
     }
   }
   fetchPhotographers();
 
-  function createNewPhotographerCard(photographerList) {
+  function createNewPhotographerCard (photographerList) {
     photographerList.forEach((photographer) => {
       const card = document.createElement('section');
       card.className = 'photographer-card';

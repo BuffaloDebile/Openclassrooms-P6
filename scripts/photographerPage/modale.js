@@ -1,3 +1,4 @@
+/* eslint-disable semi */
 const errorMsgContact = document.querySelectorAll('.message-erreur');
 const modalWindow = document.getElementById('modal-window');
 const modal = document.querySelector('.modal');
@@ -12,16 +13,16 @@ const closeContact = document.querySelector('.close-contact');
 let isAnimating = false;
 
 const regexEmail =
-  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 const inputsValidity = {
   name: false,
   lastName: false,
   email: false,
-  message: false,
+  message: false
 };
 
-export function closeContactModal() {
+export function closeContactModal () {
   const form = document.querySelector('form#contact');
 
   modal.style.visibility = 'hidden';
@@ -35,7 +36,7 @@ export function closeContactModal() {
   resetForm();
 }
 
-export function openContactModal() {
+export function openContactModal () {
   modal.style.visibility = 'visible';
   modalWindow.classList.add('open');
   document.body.classList.add('modal-open-antiscroll');
@@ -45,7 +46,7 @@ export function openContactModal() {
   modalTitle.style.display = 'block';
 }
 
-export function showValidation(errorMsgIndex, inputindex, isvalid) {
+export function showValidation (errorMsgIndex, inputindex, isvalid) {
   const formInputs = document.querySelectorAll('form.modal-form input');
   if (isvalid) {
     errorMsgContact[errorMsgIndex].style.display = 'none';
@@ -56,7 +57,7 @@ export function showValidation(errorMsgIndex, inputindex, isvalid) {
   }
 }
 
-export function nameValidation() {
+export function nameValidation () {
   const formInputs = document.querySelectorAll('form.modal-form input');
   if (formInputs[0].value.length >= 3) {
     inputsValidity.name = true;
@@ -67,7 +68,7 @@ export function nameValidation() {
   }
 }
 
-export function lastnameValidation() {
+export function lastnameValidation () {
   const formInputs = document.querySelectorAll('form.modal-form input');
   if (formInputs[1].value.length >= 3) {
     inputsValidity.lastName = true;
@@ -78,7 +79,7 @@ export function lastnameValidation() {
   }
 }
 
-export function emailValidation() {
+export function emailValidation () {
   const formInputs = document.querySelectorAll('form.modal-form input');
   if (regexEmail.test(formInputs[2].value)) {
     inputsValidity.email = true;
@@ -89,7 +90,7 @@ export function emailValidation() {
   }
 }
 
-export function textareaValidation() {
+export function textareaValidation () {
   const formTextArea = document.querySelector('textarea.input-message');
   if (formTextArea.value.length >= 10 && formTextArea.value.length <= 150) {
     errorMsgContact[3].style.display = 'none';
@@ -101,7 +102,7 @@ export function textareaValidation() {
   }
 }
 
-export function resetForm() {
+export function resetForm () {
   const form = document.querySelector('form#contact');
   const formInputs = document.querySelectorAll('form.modal-form input');
   const formTextArea = document.querySelector('textarea.input-message');
@@ -117,7 +118,7 @@ export function resetForm() {
   inputsValidity.message = false;
 }
 
-export function handleForm(e) {
+export function handleForm (e) {
   e.preventDefault();
 
   const form = document.querySelector('form#contact');
