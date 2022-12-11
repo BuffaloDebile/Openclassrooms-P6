@@ -70,7 +70,7 @@ export function displayBannerPhotograph(myPagePhotograph) {
 
   const formName = document.querySelector('.form-photographer-name');
 
-  formName.innerText = Media.photographerName;
+  formName.innerText = myPagePhotograph.name;
 
   PageTitle.innerText = `Fisheye - ${myPagePhotograph.name}`;
 
